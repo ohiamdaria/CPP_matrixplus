@@ -39,16 +39,22 @@ public:
 
     S21Matrix Transpose();
 
+    void Submatrix(const S21Matrix& other, int rows_copy, int columns_copy);
+
     S21Matrix CalcComplements();
 
+    double Determinant();
+
+    S21Matrix InverseMatrix();
+
+    S21Matrix Minor();
 
 
-
-    virtual void operator+(S21Matrix &m1)
+    virtual void operator=( S21Matrix m1)
     {
         for (int i = 0; i < s21GetCols(); i++)
             for (int j = 0; j < s21GetRows(); j++) {
-               matrix_[i][j] = m1.matrix_[i][j] + matrix_[i][j];
+                matrix_[i][j] = m1.matrix_[i][j];
             }
     }
 
@@ -62,45 +68,38 @@ public:
 //        return result;
 //    }
 
-    friend S21Matrix operator*(S21Matrix &m1, S21Matrix &m2)
-    {
-        S21Matrix result {m1.s21GetRows(), m1.s21GetRows()};
-        for (int i = 0; i < m1.s21GetCols(); i++)
-            for (int j = 0; j < m1.s21GetRows(); j++) {
-                result.matrix_[i][j] = m1.matrix_[i][j] * m2.matrix_[i][j];
-            }
-        return result;
-    }
+//    friend S21Matrix operator*(S21Matrix &m1, S21Matrix &m2)
+//    {
+//        S21Matrix result {m1.s21GetRows(), m1.s21GetRows()};
+//        for (int i = 0; i < m1.s21GetCols(); i++)
+//            for (int j = 0; j < m1.s21GetRows(); j++) {
+//                result.matrix_[i][j] = m1.matrix_[i][j] * m2.matrix_[i][j];
+//            }
+//        return result;
+//    }
 
-    friend S21Matrix operator*(S21Matrix &m1, double num)
-    {
-        S21Matrix result {m1.s21GetRows(), m1.s21GetRows()};
-        for (int i = 0; i < m1.s21GetCols(); i++)
-            for (int j = 0; j < m1.s21GetRows(); j++) {
-                result.matrix_[i][j] = m1.matrix_[i][j] * num;
-            }
-        return result;
-    }
+//    friend S21Matrix operator*(S21Matrix &m1, double num)
+//    {
+//        S21Matrix result {m1.s21GetRows(), m1.s21GetRows()};
+//        for (int i = 0; i < m1.s21GetCols(); i++)
+//            for (int j = 0; j < m1.s21GetRows(); j++) {
+//                result.matrix_[i][j] = m1.matrix_[i][j] * num;
+//            }
+//        return result;
+//    }
 
-    friend bool operator==(S21Matrix &m1, S21Matrix &m2)
-    {
-        bool status = true;
-        for (int i = 0; i < m1.s21GetCols(); i++)
-            for (int j = 0; j < m1.s21GetRows(); j++)
-                if (fabs(m1.matrix_[i][j] - m2.matrix_[i][j]) > 1e-7) {
-                    status = false;
-                    break;
-                }
-        return status;
-    }
+//    friend bool operator==(S21Matrix &m1, S21Matrix &m2)
+//    {
+//        bool status = true;
+//        for (int i = 0; i < m1.s21GetCols(); i++)
+//            for (int j = 0; j < m1.s21GetRows(); j++)
+//                if (fabs(m1.matrix_[i][j] - m2.matrix_[i][j]) > 1e-7) {
+//                    status = false;
+//                    break;
+//                }
+//        return status;
+//    }
 
-    virtual void operator=( S21Matrix &m1)
-    {
-        for (int i = 0; i < s21GetCols(); i++)
-            for (int j = 0; j < s21GetRows(); j++) {
-                matrix_[i][j] = m1.matrix_[i][j];
-            }
-    }
 
 //    virtual void operator+=( S21Matrix &m1, Sum)
 //    {
@@ -111,8 +110,10 @@ public:
 //    }
 
 
-    void Printmatrix(const S21Matrix);
+    void Printmatrix();
 
 };
+
+S21Matrix operator+(S21Matrix &m1, S21Matrix &m2);
 
 #endif //UNTITLED_S21MATRIX_H
