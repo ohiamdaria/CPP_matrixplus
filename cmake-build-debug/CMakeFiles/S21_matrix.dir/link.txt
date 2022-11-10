@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++ -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/S21_matrix.dir/main.cpp.o CMakeFiles/S21_matrix.dir/S21Matrix.cpp.o -o S21_matrix 

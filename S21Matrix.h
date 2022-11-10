@@ -49,8 +49,9 @@ public:
 
     S21Matrix Minor();
 
+    void KnowSize(const S21Matrix& other);
 
-    virtual void operator=( S21Matrix m1)
+    virtual void operator=(S21Matrix m1)
     {
         for (int i = 0; i < s21GetCols(); i++)
             for (int j = 0; j < s21GetRows(); j++) {
@@ -58,62 +59,25 @@ public:
             }
     }
 
-//    friend S21Matrix operator-(S21Matrix &m1)
-//    {
-//        S21Matrix result {m1.s21GetRows(), m1.s21GetRows()};
-//        for (int i = 0; i < m1.s21GetCols(); i++)
-//            for (int j = 0; j < m1.s21GetRows(); j++) {
-//                result.matrix_[i][j] = m1.matrix_[i][j] - m2.matrix_[i][j];
-//            }
-//        return result;
-//    }
+    virtual double operator()(int i, int j)
+    {
+        return matrix_[i][j];
+    }
 
-//    friend S21Matrix operator*(S21Matrix &m1, S21Matrix &m2)
-//    {
-//        S21Matrix result {m1.s21GetRows(), m1.s21GetRows()};
-//        for (int i = 0; i < m1.s21GetCols(); i++)
-//            for (int j = 0; j < m1.s21GetRows(); j++) {
-//                result.matrix_[i][j] = m1.matrix_[i][j] * m2.matrix_[i][j];
-//            }
-//        return result;
-//    }
-
-//    friend S21Matrix operator*(S21Matrix &m1, double num)
-//    {
-//        S21Matrix result {m1.s21GetRows(), m1.s21GetRows()};
-//        for (int i = 0; i < m1.s21GetCols(); i++)
-//            for (int j = 0; j < m1.s21GetRows(); j++) {
-//                result.matrix_[i][j] = m1.matrix_[i][j] * num;
-//            }
-//        return result;
-//    }
-
-//    friend bool operator==(S21Matrix &m1, S21Matrix &m2)
-//    {
-//        bool status = true;
-//        for (int i = 0; i < m1.s21GetCols(); i++)
-//            for (int j = 0; j < m1.s21GetRows(); j++)
-//                if (fabs(m1.matrix_[i][j] - m2.matrix_[i][j]) > 1e-7) {
-//                    status = false;
-//                    break;
-//                }
-//        return status;
-//    }
-
-
-//    virtual void operator+=( S21Matrix &m1, Sum)
-//    {
-//        for (int i = 0; i < s21GetCols(); i++)
-//            for (int j = 0; j < s21GetRows(); j++) {
-//                matrix_[i][j] = m1.matrix_[i][j];
-//            }
-//    }
-
-
+    void MergeMatrix(const S21Matrix& other, int sign);
     void Printmatrix();
 
 };
 
 S21Matrix operator+(S21Matrix &m1, S21Matrix &m2);
+S21Matrix operator-(S21Matrix &m1, S21Matrix &m2);
+S21Matrix operator*(S21Matrix &m1, S21Matrix &m2);
+S21Matrix operator*(S21Matrix &m1, double num);
+bool operator==(S21Matrix &m1, S21Matrix &m2);
+void operator+=(S21Matrix &m1, S21Matrix &m2);
+void operator-=(S21Matrix &m1, S21Matrix &m2);
+void operator*=(S21Matrix &m1, S21Matrix &m2);
+void operator*=(S21Matrix &m1, double num);
+
 
 #endif //UNTITLED_S21MATRIX_H
