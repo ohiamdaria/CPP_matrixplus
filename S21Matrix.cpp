@@ -17,10 +17,27 @@ S21Matrix::S21Matrix(int rows, int cols) {
     }
 }
 
+S21Matrix::S21Matrix(const S21Matrix& other)
+{
+    S21Matrix result(other.rows_, other.cols_);
+    result = other;
+}
+
+S21Matrix::S21Matrix(S21Matrix&& other)
+{
+    S21Matrix result(other.rows_, other.cols_);
+    result = other;
+}
+
+S21Matrix::~S21Matrix()
+{
+
+}
+
 void S21Matrix::Printmatrix()
 {
-    for (int i = 0; i < s21GetCols(); i++) {
-        for (int j = 0; j < s21GetRows(); j++) {
+    for (int i = 0; i < s21GetRows(); i++) {
+        for (int j = 0; j < s21GetCols(); j++) {
             std::cout << matrix_[i][j] << ' ';
         }
         std::cout << '\n';
@@ -29,8 +46,8 @@ void S21Matrix::Printmatrix()
 
 void S21Matrix::MergeMatrix(const S21Matrix &other, int sign)
 {
-    for (int i = 0; i < s21GetCols(); i++)
-        for (int j = 0; j < s21GetRows(); j++) {
+    for (int i = 0; i < s21GetRows(); i++)
+        for (int j = 0; j < s21GetCols(); j++) {
             matrix_[i][j] = other.matrix_[i][j] * sign;
         }
 }
@@ -94,18 +111,9 @@ void operator*=(S21Matrix &m1, double num)
 }
 
 
-void S21Matrix::AddMatrix(const S21Matrix, double x) {
-//    matrix_[0][0] = 2.0;
-//    matrix_[0][1] = 5.0;
-//    matrix_[0][2] = 7.0;
-//    matrix_[1][0] = 6.0;
-//    matrix_[1][1] = 3.0;
-//    matrix_[1][2] = 4.0;
-//    matrix_[2][0] = 5.0;
-//    matrix_[2][1] = -2.0;
-//    matrix_[2][2] = -3.0;
-    for (int i = 0; i < s21GetCols(); i++)
-        for (int j = 0; j < s21GetRows(); j++) {
+void S21Matrix::AddMatrix(double x) {
+    for (int i = 0; i < s21GetRows(); i++)
+        for (int j = 0; j < s21GetCols(); j++) {
             matrix_[i][j] = x;
         }
 }
@@ -115,10 +123,16 @@ void S21Matrix::KnowSize(const S21Matrix& other) {
         throw "Different size of matrices";
 }
 
-bool S21Matrix::EqMatrix(const S21Matrix& other) {
+void S21Matrix::KnowSquare() {
+    if ((s21GetRows() != s21GetCols()) && s21GetRows() > 0)
+        throw "Rows and cols aren't identical";
+}
+
+bool S21Matrix::EqMatrix(const S21Matrix& other)
+{
     KnowSize(other);
-    for (int i = 0; i < s21GetCols(); i++)
-        for (int j = 0; j < s21GetRows(); j++)
+    for (int i = 0; i < s21GetRows(); i++)
+        for (int j = 0; j < s21GetCols(); j++)
             if (fabs(matrix_[i][j] - other.matrix_[i][j]) > 1e-7)
                 return false;
     return true;
@@ -126,30 +140,36 @@ bool S21Matrix::EqMatrix(const S21Matrix& other) {
 
 void S21Matrix::SumMatrix(const S21Matrix& other)
 {
-    for (int i = 0; i < s21GetCols(); i++)
-        for (int j = 0; j < s21GetRows(); j++) {
+    KnowSize(other);
+    for (int i = 0; i < s21GetRows(); i++)
+        for (int j = 0; j < s21GetCols(); j++)
+        {
             matrix_[i][j] = other.matrix_[i][j] + matrix_[i][j];
         }
 }
 
 void S21Matrix::SubMatrix(const S21Matrix& other)
 {
-    for (int i = 0; i < s21GetCols(); i++)
-        for (int j = 0; j < s21GetRows(); j++) {
+    KnowSize(other);
+    for (int i = 0; i < s21GetRows(); i++)
+        for (int j = 0; j < s21GetCols(); j++)
+        {
             matrix_[i][j] = matrix_[i][j] - other.matrix_[i][j];
         }
 }
 
 void S21Matrix::MulNumber(const double num)
 {
-    for (int i = 0; i < s21GetCols(); i++)
-        for (int j = 0; j < s21GetRows(); j++) {
+    for (int i = 0; i < s21GetRows(); i++)
+        for (int j = 0; j < s21GetCols(); j++)
+        {
             matrix_[i][j] = matrix_[i][j] * num;
         }
 }
 
 void S21Matrix::MulMatrix(const S21Matrix& other)
 {
+    KnowSize(other);
     for (int i = 0; i < s21GetCols(); i++)
         for (int j = 0; j < s21GetRows(); j++) {
             matrix_[i][j] = matrix_[i][j] * other.matrix_[i][j];
@@ -158,6 +178,7 @@ void S21Matrix::MulMatrix(const S21Matrix& other)
 
 S21Matrix S21Matrix::Transpose()
 {
+    KnowSquare();
     S21Matrix result( s21GetRows(), s21GetCols());
     for (int i = 0; i < s21GetRows(); i++)
         for (int j = 0; j < s21GetCols(); j++)
@@ -186,6 +207,7 @@ void S21Matrix::Submatrix(const S21Matrix& other, int rows_copy, int columns_cop
 
 double S21Matrix::Determinant()
 {
+    KnowSquare();
     double result = 0.0;
     if (s21GetRows() == 1) {
         return matrix_[0][0];
@@ -215,6 +237,7 @@ S21Matrix S21Matrix::Minor() {
 
 S21Matrix S21Matrix::CalcComplements()
 {
+    KnowSquare();
     S21Matrix result( s21GetRows(), s21GetCols());
     for (int i = 0; i < s21GetRows(); ++i)
         for (int j = 0; j < s21GetCols(); ++j) {
@@ -229,6 +252,7 @@ S21Matrix S21Matrix::CalcComplements()
 
 S21Matrix S21Matrix::InverseMatrix()
 {
+    KnowSquare();
     double status = Determinant();
 
     S21Matrix result(s21GetRows(), s21GetCols());

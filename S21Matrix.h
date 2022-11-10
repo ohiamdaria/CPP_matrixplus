@@ -22,10 +22,12 @@ public:
     void s21SetCols(int col) { cols_ = col; }
 
     S21Matrix();
-
     S21Matrix(int rows, int cols);
+    S21Matrix(const S21Matrix& other);
+    S21Matrix(S21Matrix&& other);
+    ~S21Matrix();
 
-    void AddMatrix(const S21Matrix, double x);
+    void AddMatrix(double x);
 
     bool EqMatrix(const S21Matrix& other);
 
@@ -50,6 +52,7 @@ public:
     S21Matrix Minor();
 
     void KnowSize(const S21Matrix& other);
+    void KnowSquare();
 
     virtual void operator=(S21Matrix m1)
     {

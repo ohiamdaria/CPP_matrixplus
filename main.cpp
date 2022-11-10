@@ -3,22 +3,17 @@
 
 
 int main() {
-    S21Matrix a {3, 3};
-    S21Matrix b {2, 2};
-    S21Matrix c {3, 3};
+    S21Matrix a {2, 3};
 
-    a.AddMatrix(a, 2);
-    b.AddMatrix(b, 6);
-
-    try
-    {
-        bool res = a.EqMatrix(b);
-        std::cout << res;
+    a.AddMatrix(2);
+    try {
+        a.CalcComplements();
     }
-    catch (const char* msg)
-    {
-        std::cout << msg;
+    catch (const char*msg) {
+        std::cout<<msg;
     }
+//    S21Matrix b {a};
+//    b.Printmatrix();
 
     return 0;
 }
