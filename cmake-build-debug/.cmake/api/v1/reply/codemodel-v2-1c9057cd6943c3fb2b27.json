@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "S21_matrix::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-S21_matrix-Debug-1d6a37dfd793f89153e3.json",
+					"jsonFile" : "target-S21_matrix-Debug-17a5f143039a7e9b54c5.json",
 					"name" : "S21_matrix",
 					"projectIndex" : 0
 				}
@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/dashakoroleva/Desktop/CPP_matrixplus/cmake-build-debug",
-		"source" : "/Users/dashakoroleva/Desktop/CPP_matrixplus"
+		"build" : "/Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug",
+		"source" : "/Users/gloriagi/Desktop/CPP_matrixplus"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 4
+		"minor" : 3
 	}
 }

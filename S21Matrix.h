@@ -11,13 +11,13 @@
 class S21Matrix {
 
 private:
-    int rows_, cols_;
-    double **matrix_;
+    int rows_ = 0, cols_ = 0;
+    double **matrix_ = nullptr;
 
 public:
 
-    int s21GetRows() { return rows_; }
-    int s21GetCols() { return cols_; }
+    const int s21GetRows() { return rows_; }
+    const int s21GetCols() { return cols_; }
     void s21SetRow(int row) { rows_ = row; }
     void s21SetCols(int col) { cols_ = col; }
 

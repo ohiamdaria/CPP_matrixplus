@@ -31,7 +31,13 @@ S21Matrix::S21Matrix(S21Matrix&& other)
 
 S21Matrix::~S21Matrix()
 {
-
+    for (int i = 0; i < s21GetRows(); i++) {
+        delete[] matrix_[i];
+    }
+    delete[] matrix_;
+    s21SetRow(0);
+    s21SetCols(0);
+    matrix_ = nullptr;
 }
 
 void S21Matrix::Printmatrix()
@@ -143,9 +149,7 @@ void S21Matrix::SumMatrix(const S21Matrix& other)
     KnowSize(other);
     for (int i = 0; i < s21GetRows(); i++)
         for (int j = 0; j < s21GetCols(); j++)
-        {
             matrix_[i][j] = other.matrix_[i][j] + matrix_[i][j];
-        }
 }
 
 void S21Matrix::SubMatrix(const S21Matrix& other)
@@ -153,18 +157,14 @@ void S21Matrix::SubMatrix(const S21Matrix& other)
     KnowSize(other);
     for (int i = 0; i < s21GetRows(); i++)
         for (int j = 0; j < s21GetCols(); j++)
-        {
             matrix_[i][j] = matrix_[i][j] - other.matrix_[i][j];
-        }
 }
 
 void S21Matrix::MulNumber(const double num)
 {
     for (int i = 0; i < s21GetRows(); i++)
         for (int j = 0; j < s21GetCols(); j++)
-        {
             matrix_[i][j] = matrix_[i][j] * num;
-        }
 }
 
 void S21Matrix::MulMatrix(const S21Matrix& other)
