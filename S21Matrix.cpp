@@ -33,7 +33,7 @@ S21Matrix::S21Matrix(const S21Matrix& other)
 
 }
 
-S21Matrix S21Matrix::S21Resize(int rows, int cols)
+void S21Matrix::S21Resize(int rows, int cols)
 {
     S21Matrix result (rows, cols);
     for (int i = 0; i < rows; i++) {
@@ -41,16 +41,16 @@ S21Matrix S21Matrix::S21Resize(int rows, int cols)
             for (int j = 0; j < cols; j++) {
                 if (j < s21GetCols())
                     result.matrix_[i][j] = matrix_[i][j];
-                else
+                else {
                     result.matrix_[i][j] = 0.0;
+                }
             }
         else
             for (int j = 0; j < cols; j++) {
                 result.matrix_[i][j] = 0.0;
             }
     }
-    return result;
-
+    (*this) = result;
 }
 
 S21Matrix::~S21Matrix()

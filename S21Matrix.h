@@ -24,9 +24,9 @@ public:
     S21Matrix();
     S21Matrix(int rows, int cols);
     S21Matrix(const S21Matrix& other);
-    S21Matrix(S21Matrix&& other);
+    S21Matrix(S21Matrix&& other) noexcept;
     ~S21Matrix();
-    S21Matrix S21Resize(int rows, int cols);
+    void S21Resize(int rows, int cols);
 
     void AddMatrix(double x);
 
@@ -58,11 +58,39 @@ public:
 
     virtual void operator=(S21Matrix m1)
     {
+        this
+
         for (int i = 0; i < s21GetCols(); i++)
             for (int j = 0; j < s21GetRows(); j++) {
                 matrix_[i][j] = m1.matrix_[i][j];
             }
     }
+
+//    // Оператор присваивания копированием (copy assignment)
+//    RFive& operator=(const RFive& other)
+//    {
+//        if (this == &other)
+//            return *this;
+//
+//        char* tmp_cstring = new char[std::strlen(other.cstring) + 1];
+//        std::strcpy(tmp_cstring, other.cstring);
+//        delete[] cstring;
+//        cstring = tmp_cstring;
+//        return *this;
+//    }
+//
+//    // Оператор присваивания перемещением (move assignment)
+//    RFive& operator=(RFive&& other) noexcept
+//    {
+//        if (this == &other)
+//            return *this;
+//
+//        delete[] cstring;
+//        cstring = other.cstring;
+//        other.cstring = nullptr;
+//        return *this;
+//    }
+
 
     virtual double operator()(int i, int j)
     {

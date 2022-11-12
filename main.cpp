@@ -6,10 +6,10 @@ int main() {
     S21Matrix a {2, 3};
 
     a.AddMatrix(2);
-    S21Matrix b;
 
-    b = a.S21Resize(4, 4);
-    b.Printmatrix();
+    a.S21Resize(4, 4);
+//    a.Printmatrix();
+//    b.Printmatrix();
 
 //    try {
 //        a.CalcComplements();
