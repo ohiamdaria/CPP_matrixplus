@@ -26,6 +26,7 @@ public:
     S21Matrix(const S21Matrix& other);
     S21Matrix(S21Matrix&& other);
     ~S21Matrix();
+    S21Matrix S21Resize(int rows, int cols);
 
     void AddMatrix(double x);
 
@@ -53,6 +54,7 @@ public:
 
     void KnowSize(const S21Matrix& other);
     void KnowSquare();
+    void RightSize();
 
     virtual void operator=(S21Matrix m1)
     {
@@ -69,6 +71,16 @@ public:
 
     void MergeMatrix(const S21Matrix& other, int sign);
     void Printmatrix();
+
+//    friend S21Matrix operator+(S21Matrix &m1, S21Matrix &m2);
+//    S21Matrix operator-(S21Matrix &m1, S21Matrix &m2);
+//    S21Matrix operator*(S21Matrix &m1, S21Matrix &m2);
+//    S21Matrix operator*(S21Matrix &m1, double num);
+//    bool operator==(S21Matrix &m1, S21Matrix &m2);
+//    void operator+=(S21Matrix &m1, S21Matrix &m2);
+//    void operator-=(S21Matrix &m1, S21Matrix &m2);
+//    void operator*=(S21Matrix &m1, S21Matrix &m2);
+//    void operator*=(S21Matrix &m1, double num);
 
 };
 

@@ -8,7 +8,8 @@ S21Matrix::S21Matrix() {
     matrix_ = nullptr;
 }
 
-S21Matrix::S21Matrix(int rows, int cols) {
+S21Matrix::S21Matrix(int rows, int cols)
+{
     s21SetRow(rows);
     s21SetCols(cols);
     matrix_ = new double *[rows];
@@ -19,19 +20,42 @@ S21Matrix::S21Matrix(int rows, int cols) {
 
 S21Matrix::S21Matrix(const S21Matrix& other)
 {
-    S21Matrix result(other.rows_, other.cols_);
-    result = other;
+    s21SetRow(other.rows_);
+    s21SetCols(other.cols_);
+    matrix_ = new double *[other.rows_];
+    for (int i = 0; i < other.rows_; i++) {
+        matrix_[i] = new double[other.cols_];
+    }
+    for (int i = 0; i < other.rows_; i++)
+        for (int j = 0; j < other.cols_; j++) {
+            matrix_[i][j] = other.matrix_[i][j];
+    }
+
 }
 
-S21Matrix::S21Matrix(S21Matrix&& other)
+S21Matrix S21Matrix::S21Resize(int rows, int cols)
 {
-    S21Matrix result(other.rows_, other.cols_);
-    result = other;
+    S21Matrix result (rows, cols);
+    for (int i = 0; i < rows; i++) {
+        if (i < s21GetRows())
+            for (int j = 0; j < cols; j++) {
+                if (j < s21GetCols())
+                    result.matrix_[i][j] = matrix_[i][j];
+                else
+                    result.matrix_[i][j] = 0.0;
+            }
+        else
+            for (int j = 0; j < cols; j++) {
+                result.matrix_[i][j] = 0.0;
+            }
+    }
+    return result;
+
 }
 
 S21Matrix::~S21Matrix()
 {
-    for (int i = 0; i < s21GetRows(); i++) {
+    for (int i = s21GetRows() - 1; i >= 0; i--) {
         delete[] matrix_[i];
     }
     delete[] matrix_;
@@ -117,22 +141,31 @@ void operator*=(S21Matrix &m1, double num)
 }
 
 
-void S21Matrix::AddMatrix(double x) {
+void S21Matrix::AddMatrix(double x)
+{
     for (int i = 0; i < s21GetRows(); i++)
         for (int j = 0; j < s21GetCols(); j++) {
             matrix_[i][j] = x;
         }
 }
 
-void S21Matrix::KnowSize(const S21Matrix& other) {
+void S21Matrix::KnowSize(const S21Matrix& other)
+{
     if (s21GetRows() != other.rows_ || s21GetCols() != other.cols_)
         throw "Different size of matrices";
 }
 
-void S21Matrix::KnowSquare() {
+void S21Matrix::KnowSquare()
+{
     if ((s21GetRows() != s21GetCols()) && s21GetRows() > 0)
         throw "Rows and cols aren't identical";
 }
+
+void S21Matrix::RightSize() {
+    if (s21GetRows() < 0 ||  s21GetCols() < 0)
+        throw "Wring size of matrix";
+}
+
 
 bool S21Matrix::EqMatrix(const S21Matrix& other)
 {
