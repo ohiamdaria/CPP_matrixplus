@@ -3,19 +3,15 @@
 
 
 int main() {
+    S21Matrix m(5, 3);
+    S21Matrix n;
 
-    S21Matrix a {2, 3};
-    S21Matrix c {2, 3};
-    a.AddMatrix(2);
-    a.Printmatrix();
-    c.AddMatrix(4);
-    c.Printmatrix();
-    S21Matrix b {a * 1.0};
-    b.Printmatrix();
-
-    b.S21Resize(5, 5);
-    b.Printmatrix();
-
+    m.AddMatrix(2);
+    m.s21SetCols(7);
+    m.Printmatrix();
+    std::cout << '\n';
+    m.s21SetRows(2);
+    m.Printmatrix();
 
     return 0;
 }

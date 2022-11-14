@@ -18,41 +18,41 @@ public:
 
     const int s21GetRows() { return rows_; }
     const int s21GetCols() { return cols_; }
-    void s21SetRow(int row) { rows_ = row; }
-    void s21SetCols(int col) { cols_ = col; }
+    void s21SetRows(int row);
+    void s21SetCols(int col);
 
     S21Matrix();
     S21Matrix(int rows, int cols);
     S21Matrix(const S21Matrix& other);
     S21Matrix(S21Matrix&& other) noexcept;
     ~S21Matrix();
+
     void S21Resize(int rows, int cols);
 
     void AddMatrix(double x);
     void CopyMatrix(const S21Matrix &other);
     void DeleteMatrix();
-//
-//    bool EqMatrix(const S21Matrix& other);
-//
+
+    bool EqMatrix(const S21Matrix& other);
+
     void SumMatrix(const S21Matrix& other);
-//
-//    void SubMatrix(const S21Matrix& other);
-//
+
+    void SubMatrix(const S21Matrix& other);
+    void Submatrix(const S21Matrix& other, int rows_copy, int columns_copy);
+
+    void MulMatrix(const S21Matrix& other);
+
     void MulNumber(const double num);
-//
-//    void MulMatrix(const S21Matrix& other);
-//
-//    S21Matrix Transpose();
-//
-//    void Submatrix(const S21Matrix& other, int rows_copy, int columns_copy);
-//
-//    S21Matrix CalcComplements();
-//
-//    double Determinant();
-//
-//    S21Matrix InverseMatrix();
-//
-//    S21Matrix Minor();
+
+    S21Matrix Transpose();
+
+    S21Matrix CalcComplements();
+
+    double Determinant();
+
+    S21Matrix InverseMatrix();
+
+    S21Matrix Minor();
 
     void KnowSize(const S21Matrix& other);
     void KnowSquare();
@@ -93,16 +93,8 @@ public:
     void MergeMatrix(const S21Matrix& other, int sign);
     void Printmatrix();
 
-    S21Matrix operator=(S21Matrix& other);
-//    friend S21Matrix operator+(S21Matrix &m1, S21Matrix &m2);
-//    friend S21Matrix operator+(S21Matrix &m1, S21Matrix &m2);
-//    S21Matrix operator*(S21Matrix &m1, double num);
-//    bool operator==(S21Matrix &m1, S21Matrix &m2);
-//    void operator+=(S21Matrix &m1, S21Matrix &m2);
-//    void operator-=(S21Matrix &m1, S21Matrix &m2);
-//    void operator*=(S21Matrix &m1, S21Matrix &m2);
-//    void operator*=(S21Matrix &m1, double num);
-
+    S21Matrix operator=(S21Matrix &other);
+    S21Matrix operator=(S21Matrix &&other);
 };
 
 S21Matrix operator+(S21Matrix &m1, S21Matrix &m2);
