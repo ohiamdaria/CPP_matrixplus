@@ -8,6 +8,9 @@ S21Matrix::S21Matrix() : rows_(0), cols_(0), matrix_(nullptr) {}
 
 S21Matrix::S21Matrix(int rows, int cols)
 {
+    if (rows_ <= 0 || cols_ <= 0)
+        throw std::out_of_range(
+                "Incorrect input. Values must be greater than 0");
     this->rows_ = rows;
     this->cols_ = cols;
     matrix_ = new double *[rows];
@@ -16,10 +19,9 @@ S21Matrix::S21Matrix(int rows, int cols)
     }
 }
 
-
 S21Matrix S21Matrix::operator=(S21Matrix &other)
 {
-    this->CopyMatrix(other); // wrong
+    this->CopyMatrix(other);
     return (*this);
 }
 
@@ -66,31 +68,30 @@ void S21Matrix::DeleteMatrix()
     delete[] matrix_;
     rows_ = 0;
     cols_ = 0;
-    matrix_ = nullptr;
 }
 
 void S21Matrix::s21SetRows(int row)
 {
-    if (row < 1) throw "Incorrect input";
-    else
-        S21Resize(row, cols_);
+    if (row <= 0)
+        throw std::out_of_range(
+                "Incorrect input. Values must be greater than 0");
+    S21Resize(row, cols_);
 }
 
 void S21Matrix::s21SetCols(int col)
 {
-    if (col < 1) throw "Incorrect input";
-    else
-        S21Resize(rows_, col);
+    if (col <= 0)
+        throw std::out_of_range(
+                "Incorrect input. Values must be greater than 0");
+    S21Resize(rows_, col);
 }
 
 void S21Matrix::S21Resize(int rows, int cols)
 {
+    if (rows_ <= 0 || cols_ <= 0)
+        throw std::out_of_range(
+                "Incorrect input. Values must be greater than 0");
     S21Matrix result (rows, cols);
-    if (rows < s21GetRows())
-        while(rows < rows_) {
-            delete[] matrix_[rows_ - 1];
-            rows_--;
-        }
     for (int i = 0; i < rows; i++) {
         if (i < s21GetRows())
             for (int j = 0; j < cols; j++) {
@@ -133,62 +134,59 @@ void S21Matrix::MergeMatrix(const S21Matrix &other, int sign)
         }
 }
 
-S21Matrix operator+(S21Matrix &m1, S21Matrix &m2)
+S21Matrix S21Matrix::operator+(const S21Matrix &other) const
 {
-    S21Matrix res (m1);
-    res.SumMatrix(m2);
+    S21Matrix res {*this};
+    res.SumMatrix(other);
     return res;
 }
-//
-//S21Matrix operator-(S21Matrix &m1, S21Matrix &m2)
-//{
-//    S21Matrix res (m1.s21GetRows(), m1.s21GetCols());
-//    res.MergeMatrix(m1, 1);
-//    res.SubMatrix(m2);
-//    return res;
-//}
-//
-//S21Matrix operator*(S21Matrix &m1, S21Matrix &m2)
-//{
-//    S21Matrix res (m1.s21GetRows(), m1.s21GetCols());
-//    res.MergeMatrix(m1, 1);
-//    res.MulMatrix(m2);
-//    return res;
-//}
-//
-S21Matrix operator*(S21Matrix &m1, double num)
+
+S21Matrix S21Matrix::operator-(const S21Matrix &other) const
 {
-    S21Matrix res (m1.s21GetRows(), m1.s21GetCols());
-    res.MergeMatrix(m1, 1);
+    S21Matrix res {*this};
+    res.SubMatrix(other);
+    return res;
+}
+
+S21Matrix S21Matrix::operator*(const S21Matrix &other) const
+{
+    S21Matrix res {*this};
+    res.MulMatrix(other);
+    return res;
+}
+
+S21Matrix S21Matrix::operator*(double num) const
+{
+    S21Matrix res {*this};
     res.MulNumber(num);
     return res;
 }
 
-bool operator==(S21Matrix &m1, S21Matrix &m2)
+bool S21Matrix::operator==(const S21Matrix &other) noexcept
 {
-    bool status = m1.EqMatrix(m2);
+    bool status = this->EqMatrix(other);
     return status;
 }
 
-void operator+=(S21Matrix &m1, S21Matrix &m2)
+void S21Matrix::operator+=(const S21Matrix &other)
 {
-    m1.SumMatrix(m2);
+   this->SumMatrix(other);
 }
 
-//void operator-=(S21Matrix &m1, S21Matrix &m2)
-//{
-//    m1.SubMatrix(m2);
-//}
-//
-//void operator*=(S21Matrix &m1, S21Matrix &m2)
-//{
-//    m1.MulMatrix(m2);
-//}
-//
-//void operator*=(S21Matrix &m1, double num)
-//{
-//    m1.MulNumber(num);
-//}
+void S21Matrix::operator-=(const S21Matrix &other)
+{
+    this->SubMatrix(other);
+}
+
+void S21Matrix::operator*=(const S21Matrix &other)
+{
+    this->MulMatrix(other);
+}
+
+void S21Matrix::operator*=(double num)
+{
+    this->MulNumber(num);
+}
 
 
 void S21Matrix::AddMatrix(double x)
@@ -202,18 +200,21 @@ void S21Matrix::AddMatrix(double x)
 void S21Matrix::KnowSize(const S21Matrix& other)
 {
     if (s21GetRows() != other.rows_ || s21GetCols() != other.cols_)
-        throw "Different size of matrices";
+        throw std::logic_error(
+                "Different size of matrices");
 }
 
 void S21Matrix::KnowSquare()
 {
-    if ((s21GetRows() != s21GetCols()) && s21GetRows() > 0)
-        throw "Rows and cols aren't identical";
+    if (s21GetRows() != s21GetCols())
+        throw std::logic_error(
+                "It's not a square matrix");
 }
 
 void S21Matrix::RightSize() {
-    if (s21GetRows() <= 0 ||  s21GetCols() <= 0)
-        throw "Wring size of matrix";
+    if (rows_ <= 0 || cols_ <= 0)
+        throw std::out_of_range(
+                "Incorrect input. Values must be greater than 0");
 }
 
 

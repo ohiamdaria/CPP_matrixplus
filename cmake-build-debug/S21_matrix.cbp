@@ -5,7 +5,7 @@
 		<Option title="S21_matrix"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\opt\;CMake Files\..\..\..\..\opt\homebrew\;CMake Files\..\..\..\..\opt\homebrew\lib\;CMake Files\..\..\..\..\opt\homebrew\lib\cmake\;CMake Files\..\..\..\..\opt\homebrew\lib\cmake\GTest\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/Users/dashakoroleva/Desktop/CPP_matrixplus/cmake-build-debug"/>
@@ -89,6 +89,18 @@
 		</Unit>
 		<Unit filename="/Users/dashakoroleva/Desktop/CPP_matrixplus/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/dashakoroleva/Desktop/CPP_matrixplus/../../../../opt/homebrew/lib/cmake/GTest/GTestConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\opt\homebrew\lib\cmake\GTest\"/>
+		</Unit>
+		<Unit filename="/Users/dashakoroleva/Desktop/CPP_matrixplus/../../../../opt/homebrew/lib/cmake/GTest/GTestConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\opt\homebrew\lib\cmake\GTest\"/>
+		</Unit>
+		<Unit filename="/Users/dashakoroleva/Desktop/CPP_matrixplus/../../../../opt/homebrew/lib/cmake/GTest/GTestTargets-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\opt\homebrew\lib\cmake\GTest\"/>
+		</Unit>
+		<Unit filename="/Users/dashakoroleva/Desktop/CPP_matrixplus/../../../../opt/homebrew/lib/cmake/GTest/GTestTargets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\opt\homebrew\lib\cmake\GTest\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

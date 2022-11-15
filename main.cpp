@@ -3,15 +3,18 @@
 
 
 int main() {
-    S21Matrix m(5, 3);
+//    try {
+//        S21Matrix m{-1, 3};
+//    }
+//    catch (const std::out_of_range& oor) {
+//        std::cout << "Caught: " << oor.what() << std::endl;
+//    }
+
+    S21Matrix m{1, 3};
     S21Matrix n;
-
-    m.AddMatrix(2);
-    m.s21SetCols(7);
+    n = m;
+    n.Printmatrix();
+    std::cout << std::endl;
     m.Printmatrix();
-    std::cout << '\n';
-    m.s21SetRows(2);
-    m.Printmatrix();
-
     return 0;
 }

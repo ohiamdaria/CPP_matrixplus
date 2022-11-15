@@ -88,19 +88,24 @@ public:
     virtual double operator()(int i, int j)
     {
         return matrix_[i][j];
-    }
+    };
 
     void MergeMatrix(const S21Matrix& other, int sign);
     void Printmatrix();
 
     S21Matrix operator=(S21Matrix &other);
     S21Matrix operator=(S21Matrix &&other);
-};
+    S21Matrix operator+(const S21Matrix &other) const;
+    S21Matrix operator-(const S21Matrix &other) const;
+    S21Matrix operator*(const S21Matrix &other) const;
+    S21Matrix operator*(double num) const;
+    bool operator==(const S21Matrix &other) noexcept;
+    void operator+=(const S21Matrix &other);
+    void operator-=(const S21Matrix &other);
+    void operator*=(const S21Matrix &other);
+    void operator*=(double num);
 
-S21Matrix operator+(S21Matrix &m1, S21Matrix &m2);
-S21Matrix operator-(S21Matrix &m1, S21Matrix &m2);
-S21Matrix operator*(S21Matrix &m1, S21Matrix &m2);
-S21Matrix operator*(S21Matrix &m1, double num);
+};
 
 bool operator==(S21Matrix &m1, S21Matrix &m2);
 void operator+=(S21Matrix &m1, S21Matrix &m2);
