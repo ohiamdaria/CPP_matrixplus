@@ -4,30 +4,29 @@
 
 #include "S21Matrix.h"
 
-S21Matrix::S21Matrix() : rows_(0), cols_(0), matrix_(nullptr) {}
+S21Matrix::S21Matrix() : rows_(1), cols_(1), matrix_(nullptr) {}
 
-S21Matrix::S21Matrix(int rows, int cols)
+S21Matrix::S21Matrix(int rows, int cols): rows_(rows), cols_(cols)
 {
     if (rows <= 0 || cols <= 0)
         throw std::out_of_range(
                 "Incorrect input. Values must be greater than 0");
-    this->rows_ = rows;
-    this->cols_ = cols;
-    matrix_ = new double *[rows];
-    for (int i = 0; i < rows; i++) {
-        matrix_[i] = new double[cols];
-    }
+    matrix_ = new double *[rows * cols]();
 }
 
-S21Matrix::S21Matrix(const S21Matrix& other)
+S21Matrix::S21Matrix(const S21Matrix& other): rows_(other.rows_), cols_(other.cols_)
 {
-    this->CopyMatrix(other);
+    matrix_ = new double *[other.rows_ * other.cols_]();
+    std::memcpy(matrix_, other.matrix_,  other.rows_ * other.cols_ * sizeof(double));
 }
 
 S21Matrix::S21Matrix(S21Matrix&& other) noexcept
-        : rows_(other.rows_), cols_(other.cols_), matrix_(other.matrix_)
+        : rows_(other.rows_), cols_(other.cols_)
 {
-    other.DeleteMatrix();
+    delete [] matrix_;
+    matrix_ = new double *[other.rows_ * other.cols_]();
+    std::memcpy(matrix_, other.matrix_,  other.rows_ * other.cols_ * sizeof(double));
+    delete [] other.matrix_;
 }
 
 S21Matrix::~S21Matrix()
