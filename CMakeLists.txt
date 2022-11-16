@@ -3,7 +3,5 @@ project(S21_matrix)
 
 set(CMAKE_CXX_STANDARD 17)
 
-find_package(GTest REQUIRED)
-include(GoogleTest)
 
-add_executable(S21_matrix main.cpp S21Matrix.cpp S21Matrix.h)
+add_executable(S21_matrix main.cpp S21Matrix.cpp S21Matrix.h s21_constructors.cpp s21_accessor_mutator.cpp s21_operators.cpp s21_functions.cpp s21_others.cpp)

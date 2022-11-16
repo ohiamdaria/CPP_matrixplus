@@ -30,7 +30,9 @@ public:
     void S21Resize(int rows, int cols);
 
     void AddMatrix(double x);
+
     void CopyMatrix(const S21Matrix &other);
+
     void DeleteMatrix();
 
     bool EqMatrix(const S21Matrix& other);
@@ -38,6 +40,7 @@ public:
     void SumMatrix(const S21Matrix& other);
 
     void SubMatrix(const S21Matrix& other);
+
     void Submatrix(const S21Matrix& other, int rows_copy, int columns_copy);
 
     void MulMatrix(const S21Matrix& other);
@@ -58,60 +61,32 @@ public:
     void KnowSquare();
     void RightSize();
 
-
-//    // Оператор присваивания копированием (copy assignment)
-//    RFive& operator=(const RFive& other)
-//    {
-//        if (this == &other)
-//            return *this;
-//
-//        char* tmp_cstring = new char[std::strlen(other.cstring) + 1];
-//        std::strcpy(tmp_cstring, other.cstring);
-//        delete[] cstring;
-//        cstring = tmp_cstring;
-//        return *this;
-//    }
-//
-//    // Оператор присваивания перемещением (move assignment)
-//    RFive& operator=(RFive&& other) noexcept
-//    {
-//        if (this == &other)
-//            return *this;
-//
-//        delete[] cstring;
-//        cstring = other.cstring;
-//        other.cstring = nullptr;
-//        return *this;
-//    }
-
-
     virtual double operator()(int i, int j)
     {
         return matrix_[i][j];
     };
 
     void MergeMatrix(const S21Matrix& other, int sign);
-    void Printmatrix();
+    void Printmatrix() noexcept;
 
-    S21Matrix operator=(S21Matrix &other);
-    S21Matrix operator=(S21Matrix &&other);
+    S21Matrix &operator=(S21Matrix &&other) noexcept; // оператор присваивания перемещением
+    S21Matrix &operator=(const S21Matrix &other); // оператор присваивания копированием
+
     S21Matrix operator+(const S21Matrix &other) const;
     S21Matrix operator-(const S21Matrix &other) const;
     S21Matrix operator*(const S21Matrix &other) const;
-    S21Matrix operator*(double num) const;
+    S21Matrix operator*(const double num) const;
     bool operator==(const S21Matrix &other) noexcept;
-    void operator+=(const S21Matrix &other);
-    void operator-=(const S21Matrix &other);
-    void operator*=(const S21Matrix &other);
-    void operator*=(double num);
+    S21Matrix operator+=(const S21Matrix &other);
+    S21Matrix operator-=(const S21Matrix &other);
+    S21Matrix operator*=(const S21Matrix &other);
+    S21Matrix operator*=(double num);
 
 };
 
-bool operator==(S21Matrix &m1, S21Matrix &m2);
-void operator+=(S21Matrix &m1, S21Matrix &m2);
-void operator-=(S21Matrix &m1, S21Matrix &m2);
-void operator*=(S21Matrix &m1, S21Matrix &m2);
-void operator*=(S21Matrix &m1, double num);
+S21Matrix operator*(const double num, const S21Matrix &my);
+
+
 
 
 #endif //UNTITLED_S21MATRIX_H
