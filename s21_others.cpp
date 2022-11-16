@@ -20,9 +20,6 @@ void S21Matrix::CopyMatrix(const S21Matrix &other)
 
 void S21Matrix::DeleteMatrix()
 {
-    for (int i = s21GetRows() - 1; i >= 0; i--) {
-        delete[] matrix_[i];
-    }
     delete[] matrix_;
     rows_ = 0;
     cols_ = 0;
@@ -34,7 +31,7 @@ void S21Matrix::Printmatrix() noexcept
 {
     for (int i = 0; i < s21GetRows(); i++) {
         for (int j = 0; j < s21GetCols(); j++) {
-            std::cout << matrix_[i][j] << ' ';
+            std::cout << *this(i, j) << ' ';
         }
         std::cout << '\n';
     }
@@ -50,10 +47,9 @@ void S21Matrix::MergeMatrix(const S21Matrix &other, int sign)
 
 void S21Matrix::AddMatrix(double x)
 {
-    for (int i = 0; i < s21GetRows(); i++)
-        for (int j = 0; j < s21GetCols(); j++) {
-            matrix_[i][j] = i + j;
-        }
+    for (int i = 0; i < rows_; i++)
+        for (int j = 0; j < cols_; j++)
+            matrix_[0][j] = x * j;
 }
 
 void S21Matrix::KnowSize(const S21Matrix& other)

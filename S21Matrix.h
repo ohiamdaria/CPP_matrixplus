@@ -63,7 +63,7 @@ public:
 
     virtual double operator()(int i, int j)
     {
-        return matrix_[i][j];
+        return **(matrix_ + i * j);
     };
 
     void MergeMatrix(const S21Matrix& other, int sign);
