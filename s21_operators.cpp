@@ -1,13 +1,9 @@
-//
-// Created by Dasha Koroleva on 15.11.2022.
-//
 #include "S21Matrix.h"
 
 S21Matrix &S21Matrix::operator=(const S21Matrix &other) // копирование
 {
     if (this == &other)
         return (*this);
-
     this->CopyMatrix(other);
     return (*this);
 }
@@ -53,8 +49,7 @@ S21Matrix S21Matrix::operator*(double num) const
 
 S21Matrix operator*(const double num, const S21Matrix &my) // как вызвать конструктор копирования и конструктор перемещения???
 {
-    S21Matrix res;
-    res = my;
+    S21Matrix res {my};
     res.MulNumber(num);
     return res;
 }

@@ -23,6 +23,7 @@ public:
 
     S21Matrix();
     S21Matrix(int rows, int cols);
+    void CreateMatrix();
     S21Matrix(const S21Matrix& other);
     S21Matrix(S21Matrix&& other) noexcept;
     ~S21Matrix();
@@ -60,10 +61,11 @@ public:
     void KnowSize(const S21Matrix& other);
     void KnowSquare();
     void RightSize();
+    void RightSize(int row, int col);
 
     virtual double operator()(int i, int j)
     {
-        return **(matrix_ + i * j);
+        return matrix_[i][j];
     };
 
     void MergeMatrix(const S21Matrix& other, int sign);

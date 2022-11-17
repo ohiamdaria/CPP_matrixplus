@@ -1,29 +1,20 @@
-//
-// Created by Dasha Koroleva on 15.11.2022.
-//
 #include "S21Matrix.h"
 
 void S21Matrix::s21SetRows(int row)
 {
-    if (row <= 0)
-        throw std::out_of_range(
-                "Incorrect input. Values must be greater than 0");
+    RightSize(row, cols_);
     S21Resize(row, cols_);
 }
 
 void S21Matrix::s21SetCols(int col)
 {
-    if (col <= 0)
-        throw std::out_of_range(
-                "Incorrect input. Values must be greater than 0");
+    RightSize(rows_, col);
     S21Resize(rows_, col);
 }
 
 void S21Matrix::S21Resize(int rows, int cols)
 {
-    if (rows_ <= 0 || cols_ <= 0)
-        throw std::out_of_range(
-                "Incorrect input. Values must be greater than 0");
+    RightSize();
     S21Matrix result (rows, cols);
     for (int i = 0; i < rows; i++) {
         if (i < s21GetRows())

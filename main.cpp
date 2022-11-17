@@ -5,21 +5,44 @@
 
 int main() {
     S21Matrix m {8, 3};
-    m.AddMatrix(5.0);
+    m.AddMatrix(2);
+    //m.Printmatrix();
+    std::cout << std::endl;
+    S21Matrix  k (m);// constr copy
+    k.Printmatrix();
     m.Printmatrix();
+  ///  std::cout  << &k << std::endl;
+   // std::cout  << &m << std::endl;
+    //k.Printmatrix();
+    std::cout << std::endl;
+    //m.Printmatrix();
+    std::cout << std::endl;
 
-//    S21Matrix n {m};
-//    n.Printmatrix();
+    m.AddMatrix(3);
+    k.Printmatrix();
+    std::cout << std::endl;
+    //m.Printmatrix();
+//    k.Printmatrix();
 
 
-//    int i = 9;
-//    n = m * 7;
-//    n.Printmatrix();
+
+
+
+
+
+
+
+
+
+
+
+//    m.AddMatrix(3);
+//
+//    S21Matrix n = std::move(m);// constr move
+//
+//    k = n;
+//    k.Printmatrix();.
 //    std::cout << std::endl;
-//    m.Printmatrix();
-//    m = 8 * n;
-//    std::cout << std::endl;
-//    m.Printmatrix();
-//    m.InverseMatrix();
+//    n.Printmatrix();
     return 0;
 }

@@ -5,33 +5,40 @@
 
 void S21Matrix::CopyMatrix(const S21Matrix &other)
 {
-    this->DeleteMatrix(); // здесь нужно удаление?????? ИЛИ НЕТ
-    this->rows_ = other.rows_;
-    this->cols_ = other.cols_;
-    this->matrix_ = new double *[other.rows_];
-    for (int i = 0; i < other.rows_; i++) {
-        this->matrix_[i] = new double[other.cols_];
+    KnowSize(other);
+    for (int i = 0; i < rows_; i++)
+        std::memcpy(matrix_[i], other.matrix_[i],  other.cols_ * sizeof(double));
+}
+
+void S21Matrix::CreateMatrix()
+{
+    RightSize();
+    matrix_ = new double *[rows_];
+    if (matrix_ == nullptr)
+        throw "Error allocate memory";
+
+    for (int i = 0; i < rows_; i++) {
+        matrix_[i] = new double[cols_];
+        if (matrix_ == nullptr)
+            throw "Error allocate memory";
     }
-    for (int i = 0; i < other.rows_; i++)
-        for (int j = 0; j < other.cols_; j++) {
-            this->matrix_[i][j] = other.matrix_[i][j];
-        }
 }
 
 void S21Matrix::DeleteMatrix()
 {
-    delete[] matrix_;
+    for (int i = 0; i < rows_; i++) {
+        delete[] matrix_[i];
+    }
     rows_ = 0;
     cols_ = 0;
 }
-
-
 
 void S21Matrix::Printmatrix() noexcept
 {
     for (int i = 0; i < s21GetRows(); i++) {
         for (int j = 0; j < s21GetCols(); j++) {
-            std::cout << *this(i, j) << ' ';
+            std::cout << matrix_[i][j] << ' ';
+            std::cout << &matrix_[i][j] << ' ';
         }
         std::cout << '\n';
     }
@@ -49,7 +56,8 @@ void S21Matrix::AddMatrix(double x)
 {
     for (int i = 0; i < rows_; i++)
         for (int j = 0; j < cols_; j++)
-            matrix_[0][j] = x * j;
+            this->matrix_[i][j] = x++;
+
 }
 
 void S21Matrix::KnowSize(const S21Matrix& other)
@@ -71,3 +79,9 @@ void S21Matrix::RightSize() {
         throw std::out_of_range(
                 "Incorrect input. Values must be greater than 0");
 }
+void S21Matrix::RightSize(int row, int col) {
+    if (row <= 0 || col <= 0)
+        throw std::out_of_range(
+                "Incorrect input. Values must be greater than 0");
+}
+
