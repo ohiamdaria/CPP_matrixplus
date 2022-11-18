@@ -1,0 +1,4 @@
+/Users/dashakoroleva/Desktop/School21/CPP1_s21_matrixplus/src/build/CMakeFiles/s21_matrix_oop.dir
+/Users/dashakoroleva/Desktop/School21/CPP1_s21_matrixplus/src/build/CMakeFiles/tests.dir
+/Users/dashakoroleva/Desktop/School21/CPP1_s21_matrixplus/src/build/CMakeFiles/edit_cache.dir
+/Users/dashakoroleva/Desktop/School21/CPP1_s21_matrixplus/src/build/CMakeFiles/rebuild_cache.dir

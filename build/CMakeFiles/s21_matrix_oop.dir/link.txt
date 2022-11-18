@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc s21_matrix_oop.a CMakeFiles/s21_matrix_oop.dir/arithmetic/s21_functions.cpp.o CMakeFiles/s21_matrix_oop.dir/operators/s21_operators.cpp.o CMakeFiles/s21_matrix_oop.dir/core/s21_constructors.cpp.o CMakeFiles/s21_matrix_oop.dir/core/s21_accessor_mutator.cpp.o CMakeFiles/s21_matrix_oop.dir/comparison/s21_others.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib s21_matrix_oop.a
