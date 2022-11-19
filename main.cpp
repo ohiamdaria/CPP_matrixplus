@@ -6,8 +6,8 @@ int main() {
     m.Printmatrix();
 
     std::cout << std::endl;
-    m.S21Resize(5, 8);
-//    m.Printmatrix();
+    m.S21Resize(2, 3);
+    m.Printmatrix();
 
     return 0;
 }
