@@ -6,7 +6,6 @@
 bool S21Matrix::EqMatrix(const S21Matrix& other)
 {
     if (!(rows_ == other.rows_ && cols_ == other.cols_)) return false;
-//    if (rows_ == 0 && cols_ == 0) return true;
     for (int i = 0; i < s21GetRows(); i++)
         for (int j = 0; j < s21GetCols(); j++)
             if (fabs(matrix_[i][j] - other.matrix_[i][j]) > 1e-7)
@@ -37,12 +36,25 @@ void S21Matrix::MulNumber(const double num)
             matrix_[i][j] = matrix_[i][j] * num;
 }
 
+int simple_mul(matrix_t *A, matrix_t *B, double *result,
+               unsigned int current_row, unsigned int current_column) {
+    int status = OK;
+    *result = 0.0;
+    for (int j = 0; j < A->columns; j++) {
+        *result =
+                A->matrix[current_row][j] * B->matrix[j][current_column] + *result;
+    }
+    return status;
+}
+
+
 void S21Matrix::MulMatrix(const S21Matrix& other)
 {
-    KnowSize(other);
+    int
     for (int i = 0; i < s21GetCols(); i++)
         for (int j = 0; j < s21GetRows(); j++) {
             matrix_[i][j] = matrix_[i][j] * other.matrix_[i][j];
+            status = simple_mul(A, B, &result->matrix[i][j], i, j);
         }
 }
 

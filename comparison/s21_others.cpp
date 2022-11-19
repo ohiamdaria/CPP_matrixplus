@@ -60,7 +60,8 @@ void S21Matrix::AddMatrix(double x)
 
 void S21Matrix::KnowSize(const S21Matrix& other)
 {
-    if (!(rows_ == other.rows_ && cols_ == other.cols_))
+    if (!(rows_ == other.rows_ && cols_ == other.cols_)
+    || !(rows_ == other.cols_ && cols_ == other.rows_))
         throw std::logic_error(
                 "Different size of matrices");
 }
