@@ -3,7 +3,7 @@
 
 void S21Matrix::CopyMatrix(const S21Matrix &other)
 {
-    this->DeleteMatrix();
+    if (this->matrix_!= nullptr) this->DeleteMatrix();
     rows_ = other.rows_;
     cols_ = other.cols_;
     this->CreateMatrix();
@@ -25,11 +25,11 @@ void S21Matrix::CreateMatrix()
 
 void S21Matrix::DeleteMatrix()
 {
-    for (int i = 0; i < rows_; i++) {
-        delete[] matrix_[i];
+    if (rows_ > 0 && cols_ > 0) {
+        for (rows_--; rows_ >= 0; rows_--) delete[] matrix_[rows_];
+        delete[] matrix_;
     }
-    delete[] matrix_;
-    rows_ = 0;
+    matrix_ = nullptr;
     cols_ = 0;
 }
 
@@ -38,7 +38,6 @@ void S21Matrix::Printmatrix() noexcept
     for (int i = 0; i < s21GetRows(); i++) {
         for (int j = 0; j < s21GetCols(); j++) {
             std::cout << matrix_[i][j] << ' ';
-//            std::cout << &matrix_[i][j] << ' ';
         }
         std::cout << '\n';
     }
@@ -61,7 +60,7 @@ void S21Matrix::AddMatrix(double x)
 
 void S21Matrix::KnowSize(const S21Matrix& other)
 {
-    if (s21GetRows() != other.rows_ || s21GetCols() != other.cols_)
+    if (!(rows_ == other.rows_ && cols_ == other.cols_))
         throw std::logic_error(
                 "Different size of matrices");
 }
@@ -74,12 +73,12 @@ void S21Matrix::KnowSquare()
 }
 
 void S21Matrix::RightSize() {
-    if (rows_ <= 0 || cols_ <= 0)
+    if (rows_ < 0 || cols_ < 0)
         throw std::out_of_range(
                 "Incorrect input. Values must be greater than 0");
 }
 void S21Matrix::RightSize(int row, int col) {
-    if (row <= 0 || col <= 0)
+    if (row < 0 || col < 0)
         throw std::out_of_range(
                 "Incorrect input. Values must be greater than 0");
 }

@@ -6,8 +6,20 @@ int main() {
     m.Printmatrix();
 
     std::cout << std::endl;
-    m.S21Resize(5, 1);
+    S21Matrix n;
+    n = m;
     m.Printmatrix();
+    m.S21Resize(6, 6);
+    std::cout << std::endl;
+    n.Printmatrix();
+    std::cout << std::endl;
+    m.AddMatrix(666);
+    m.Printmatrix();
+    n = m;
+    std::cout << std::endl;
+    n.Printmatrix();
+    std::cout << std::endl;
+
 
     return 0;
 }

@@ -5,7 +5,8 @@
 
 bool S21Matrix::EqMatrix(const S21Matrix& other)
 {
-    KnowSize(other);
+    if (!(rows_ == other.rows_ && cols_ == other.cols_)) return false;
+//    if (rows_ == 0 && cols_ == 0) return true;
     for (int i = 0; i < s21GetRows(); i++)
         for (int j = 0; j < s21GetCols(); j++)
             if (fabs(matrix_[i][j] - other.matrix_[i][j]) > 1e-7)

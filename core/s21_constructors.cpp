@@ -1,6 +1,6 @@
 #include "../s21_matrix_oop.h"
 
-S21Matrix::S21Matrix() : rows_(1), cols_(1), matrix_(nullptr) {}
+S21Matrix::S21Matrix() : rows_(0), cols_(0), matrix_(nullptr) {}
 
 S21Matrix::S21Matrix(int rows, int cols): rows_(rows), cols_(cols)
 {
@@ -23,5 +23,9 @@ S21Matrix::S21Matrix(S21Matrix&& other) noexcept
 
 S21Matrix::~S21Matrix()
 {
-    this->DeleteMatrix();
+    if (rows_ > 0 && cols_ > 0) {
+        for (rows_--; rows_ > 0; rows_--) delete[] matrix_[rows_];
+        delete[] matrix_;
+    }
+
 }

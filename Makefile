@@ -1,6 +1,6 @@
 BUILD_DIR="build"
 
-all: s21_matrix_oop.a
+all: clean s21_matrix_oop.a test
 .PHONY: all
 
 clean:
