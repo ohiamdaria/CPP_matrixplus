@@ -1,9 +1,10 @@
-#include "s21_matrix_oop.h"
+#include "../s21_matrix_oop.h"
 
 S21Matrix &S21Matrix::operator=(const S21Matrix &other) // копирование
 {
     if (this == &other)
         return (*this);
+
     this->CopyMatrix(other);
     return (*this);
 }

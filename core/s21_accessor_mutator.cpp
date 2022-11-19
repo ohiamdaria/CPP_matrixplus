@@ -1,4 +1,4 @@
-#include "s21_matrix_oop.h"
+#include "../s21_matrix_oop.h"
 
 void S21Matrix::s21SetRows(int row)
 {
@@ -26,9 +26,13 @@ void S21Matrix::S21Resize(int rows, int cols)
                 }
             }
         else
+        {
             for (int j = 0; j < cols; j++) {
                 result.matrix_[i][j] = 0.0;
             }
+        }
     }
+    result.Printmatrix();
+    std::cout << std::endl;
     (*this) = result;
 }

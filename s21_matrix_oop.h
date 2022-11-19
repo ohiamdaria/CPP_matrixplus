@@ -5,6 +5,7 @@
 #ifndef CPP1_S21_MATRIXPLUS_S21_MATRIX_H
 #define CPP1_S21_MATRIXPLUS_S21_MATRIX_H
 
+#include <iostream>
 #include <cmath>
 #include <stdexcept>
 

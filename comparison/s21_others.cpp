@@ -1,10 +1,9 @@
-#include "s21_matrix_oop.h"
+#include "../s21_matrix_oop.h"
 #include <cstring>
-
-using namespace std;
 
 void S21Matrix::CopyMatrix(const S21Matrix &other)
 {
+
     for (int i = 0; i < other.rows_; i++)
         std::memcpy(matrix_[i], other.matrix_[i],  other.cols_ * sizeof(double));
 }
@@ -33,13 +32,13 @@ void S21Matrix::DeleteMatrix()
 
 void S21Matrix::Printmatrix() noexcept
 {
-//    for (int i = 0; i < s21GetRows(); i++) {
-//        for (int j = 0; j < s21GetCols(); j++) {
-//            std::cout << matrix_[i][j] << ' ';
+    for (int i = 0; i < s21GetRows(); i++) {
+        for (int j = 0; j < s21GetCols(); j++) {
+            std::cout << matrix_[i][j] << ' ';
 //            std::cout << &matrix_[i][j] << ' ';
-//        }
-//        std::cout << '\n';
-//    }
+        }
+        std::cout << '\n';
+    }
 }
 
 void S21Matrix::MergeMatrix(const S21Matrix &other, int sign)

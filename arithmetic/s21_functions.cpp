@@ -1,7 +1,7 @@
 //
 // Created by Dasha Koroleva on 15.11.2022.
 //
-#include "s21_matrix_oop.h"
+#include "../s21_matrix_oop.h"
 
 bool S21Matrix::EqMatrix(const S21Matrix& other)
 {
