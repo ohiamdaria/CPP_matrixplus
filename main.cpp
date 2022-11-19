@@ -6,7 +6,7 @@ int main() {
     m.Printmatrix();
 
     std::cout << std::endl;
-    m.S21Resize(2, 3);
+    m.S21Resize(5, 1);
     m.Printmatrix();
 
     return 0;

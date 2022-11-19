@@ -3,14 +3,10 @@
 
 void S21Matrix::CopyMatrix(const S21Matrix &other)
 {
-    for (int i = 0; i < rows_; i++)
-        delete[] matrix_[i];
-    delete[] matrix_;
+    this->DeleteMatrix();
     rows_ = other.rows_;
     cols_ = other.cols_;
-    matrix_ = new double *[rows_];
-    for (int i = 0; i < rows_; i++)
-        matrix_[i] = new double[cols_];
+    this->CreateMatrix();
     for (int i = 0; i < rows_; i++)
         std::memcpy(matrix_[i], other.matrix_[i],  other.cols_ * sizeof(double));
 }
