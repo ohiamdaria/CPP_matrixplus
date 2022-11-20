@@ -1,0 +1,4 @@
+/Users/gloriagi/Desktop/dublicate/cmake-build-debug/CMakeFiles/s21_matrix_oop.dir
+/Users/gloriagi/Desktop/dublicate/cmake-build-debug/CMakeFiles/tests.dir
+/Users/gloriagi/Desktop/dublicate/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/gloriagi/Desktop/dublicate/cmake-build-debug/CMakeFiles/rebuild_cache.dir
