@@ -1,32 +1,12 @@
 [
 {
   "directory": "/Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug",
-  "command": "g++ -I/Users/gloriagi/Desktop/CPP_matrixplus/. -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=c++17 -std=gnu++17 -o CMakeFiles/s21_matrix_oop.dir/core/s21_constructors.cpp.o -c /Users/gloriagi/Desktop/CPP_matrixplus/core/s21_constructors.cpp",
-  "file": "/Users/gloriagi/Desktop/CPP_matrixplus/core/s21_constructors.cpp"
+  "command": "g++ -I/Users/gloriagi/Desktop/CPP_matrixplus/. -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=c++17 -std=gnu++17 -o CMakeFiles/s21_matrix_oop.dir/s21_matrix_oop.cpp.o -c /Users/gloriagi/Desktop/CPP_matrixplus/s21_matrix_oop.cpp",
+  "file": "/Users/gloriagi/Desktop/CPP_matrixplus/s21_matrix_oop.cpp"
 },
 {
   "directory": "/Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug",
-  "command": "g++ -I/Users/gloriagi/Desktop/CPP_matrixplus/. -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=c++17 -std=gnu++17 -o CMakeFiles/s21_matrix_oop.dir/core/s21_accessor_mutator.cpp.o -c /Users/gloriagi/Desktop/CPP_matrixplus/core/s21_accessor_mutator.cpp",
-  "file": "/Users/gloriagi/Desktop/CPP_matrixplus/core/s21_accessor_mutator.cpp"
-},
-{
-  "directory": "/Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug",
-  "command": "g++ -I/Users/gloriagi/Desktop/CPP_matrixplus/. -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=c++17 -std=gnu++17 -o CMakeFiles/s21_matrix_oop.dir/operators/s21_operators.cpp.o -c /Users/gloriagi/Desktop/CPP_matrixplus/operators/s21_operators.cpp",
-  "file": "/Users/gloriagi/Desktop/CPP_matrixplus/operators/s21_operators.cpp"
-},
-{
-  "directory": "/Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug",
-  "command": "g++ -I/Users/gloriagi/Desktop/CPP_matrixplus/. -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=c++17 -std=gnu++17 -o CMakeFiles/s21_matrix_oop.dir/arithmetic/s21_functions.cpp.o -c /Users/gloriagi/Desktop/CPP_matrixplus/arithmetic/s21_functions.cpp",
-  "file": "/Users/gloriagi/Desktop/CPP_matrixplus/arithmetic/s21_functions.cpp"
-},
-{
-  "directory": "/Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug",
-  "command": "g++ -I/Users/gloriagi/Desktop/CPP_matrixplus/. -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=c++17 -std=gnu++17 -o CMakeFiles/s21_matrix_oop.dir/comparison/s21_others.cpp.o -c /Users/gloriagi/Desktop/CPP_matrixplus/comparison/s21_others.cpp",
-  "file": "/Users/gloriagi/Desktop/CPP_matrixplus/comparison/s21_others.cpp"
-},
-{
-  "directory": "/Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug",
-  "command": "g++ -I/Users/gloriagi/Desktop/CPP_matrixplus/. -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++17 -o CMakeFiles/tests.dir/test/test_constructors.cpp.o -c /Users/gloriagi/Desktop/CPP_matrixplus/test/test_constructors.cpp",
-  "file": "/Users/gloriagi/Desktop/CPP_matrixplus/test/test_constructors.cpp"
+  "command": "g++ -I/Users/gloriagi/Desktop/CPP_matrixplus/. -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++17 -o CMakeFiles/tests.dir/test/test_functions.cpp.o -c /Users/gloriagi/Desktop/CPP_matrixplus/test/test_functions.cpp",
+  "file": "/Users/gloriagi/Desktop/CPP_matrixplus/test/test_functions.cpp"
 }
 ]

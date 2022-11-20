@@ -1,6 +1,13 @@
 #include "gtest/gtest.h"
 #include "../s21_matrix_oop.h"
 
+TEST(ConstructTest, test1) { ASSERT_ANY_THROW(S21Matrix a(-100, 10)); }
+
+TEST(ConstructTest, test2) { ASSERT_ANY_THROW(S21Matrix a(100, -100)); }
+
+TEST(ConstructTest, test3) { ASSERT_NO_THROW(S21Matrix a(1, 0)); }
+
+TEST(ConstructTest, test4) { ASSERT_NO_THROW(S21Matrix a(0, 100)); }
 
 class EqSimple : public ::testing::Test {
 protected:
@@ -293,4 +300,304 @@ TEST_F(MulMatrix3x3, test1) {
 
 TEST_F(MulMatrix3x3, test2) {
     ASSERT_TRUE((matrixA *= matrixB).EqMatrix(matrixC));
+}
+
+TEST(DetTest, test1) {
+    S21Matrix matrix(1, 1);
+    matrix(0, 0) = 5;
+
+    ASSERT_TRUE(fabs(matrix.Determinant() - 5) < EPS);
+}
+
+TEST(DetTest, test2) {
+    S21Matrix matrix(3, 3);
+
+    matrix(0, 0) = 0.25;
+    matrix(0, 1) = 1.25;
+    matrix(0, 2) = 2.25;
+    matrix(1, 0) = 3.25;
+    matrix(1, 1) = 10;
+    matrix(1, 2) = 5.25;
+    matrix(2, 0) = 6.25;
+    matrix(2, 1) = 7.25;
+    matrix(2, 2) = 8.25;
+
+    ASSERT_TRUE(fabs(matrix.Determinant() + 69) < EPS);
+}
+
+TEST(ErrorDetTest, test1) {
+    S21Matrix matrix(0, 0);
+
+    ASSERT_ANY_THROW((void)matrix.Determinant());
+}
+
+TEST(ErrorDetTest, test2) {
+    S21Matrix matrix(3, 2);
+
+    ASSERT_ANY_THROW((void)matrix.Determinant());
+}
+
+TEST(ComplementsTest, test1) {
+    S21Matrix matrixA(3, 3);
+    S21Matrix matrixB(3, 3);
+
+    matrixA(0, 0) = 5;
+    matrixA(0, 1) = -1;
+    matrixA(0, 2) = 1;
+    matrixA(1, 0) = 2;
+    matrixA(1, 1) = 3;
+    matrixA(1, 2) = 4;
+    matrixA(2, 0) = 1;
+    matrixA(2, 1) = 0;
+    matrixA(2, 2) = 3;
+
+    matrixB(0, 0) = 9;
+    matrixB(0, 1) = -2;
+    matrixB(0, 2) = -3;
+    matrixB(1, 0) = 3;
+    matrixB(1, 1) = 14;
+    matrixB(1, 2) = -1;
+    matrixB(2, 0) = -7;
+    matrixB(2, 1) = -18;
+    matrixB(2, 2) = 17;
+
+    ASSERT_TRUE(matrixA.CalcComplements().EqMatrix(matrixB));
+}
+
+TEST(ComplementsTest, test2) {
+    S21Matrix matrixA(1, 1);
+    S21Matrix matrixB(1, 1);
+
+    matrixA(0, 0) = 5;
+    matrixB(0, 0) = 5;
+
+    ASSERT_TRUE(matrixA.CalcComplements().EqMatrix(matrixB));
+}
+
+TEST(ComplementsTest, test3) {
+    S21Matrix matrixA(0, 0);
+    S21Matrix matrixB(0, 0);
+
+    ASSERT_TRUE(matrixA.CalcComplements().EqMatrix(matrixB));
+}
+
+TEST(ErrorComplementsTest, test1) {
+    S21Matrix matrix(2, 1);
+    ASSERT_ANY_THROW((void)matrix.CalcComplements());
+}
+
+class SumMatrix1 : public ::testing::Test {
+protected:
+    S21Matrix matrixA = S21Matrix(3, 3);
+    S21Matrix matrixB = S21Matrix(3, 3);
+    S21Matrix matrixC = S21Matrix(3, 3);
+
+    void SetUp() override {
+        matrixA(0, 0) = 0;
+        matrixA(0, 1) = 0;
+        matrixA(0, 2) = 0;
+        matrixA(1, 0) = 0;
+        matrixA(1, 1) = 0;
+        matrixA(1, 2) = 0;
+        matrixA(2, 0) = 0;
+        matrixA(2, 1) = 0;
+        matrixA(2, 2) = 0;
+
+        matrixB(0, 0) = 1;
+        matrixB(0, 1) = 1;
+        matrixB(0, 2) = 1;
+        matrixB(1, 0) = 1;
+        matrixB(1, 1) = 1;
+        matrixB(1, 2) = 1;
+        matrixB(2, 0) = 1;
+        matrixB(2, 1) = 1;
+        matrixB(2, 2) = 1;
+
+        matrixC(0, 0) = 1;
+        matrixC(0, 1) = 1;
+        matrixC(0, 2) = 1;
+        matrixC(1, 0) = 1;
+        matrixC(1, 1) = 1;
+        matrixC(1, 2) = 1;
+        matrixC(2, 0) = 1;
+        matrixC(2, 1) = 1;
+        matrixC(2, 2) = 1;
+    }
+};
+
+TEST_F(SumMatrix1, test1) {
+    matrixA += matrixB;
+    ASSERT_TRUE(matrixA.EqMatrix(matrixC));
+}
+
+TEST_F(SumMatrix1, test2) {
+    ASSERT_TRUE((matrixA + matrixB).EqMatrix(matrixC));
+}
+
+TEST(SumErrorTest, test1) {
+    S21Matrix matrixA = S21Matrix(2, 3);
+    S21Matrix matrixB = S21Matrix(3, 3);
+    ASSERT_ANY_THROW(matrixA + matrixB);
+}
+
+class SubMatrix1 : public ::testing::Test {
+protected:
+    S21Matrix matrixA = S21Matrix(3, 3);
+    S21Matrix matrixB = S21Matrix(3, 3);
+    S21Matrix matrixC = S21Matrix(3, 3);
+
+    void SetUp() override {
+        matrixA(0, 0) = 0;
+        matrixA(0, 1) = 0;
+        matrixA(0, 2) = 0;
+        matrixA(1, 0) = 0;
+        matrixA(1, 1) = 0;
+        matrixA(1, 2) = 0;
+        matrixA(2, 0) = 0;
+        matrixA(2, 1) = 0;
+        matrixA(2, 2) = 0;
+
+        matrixB(0, 0) = 1;
+        matrixB(0, 1) = 1;
+        matrixB(0, 2) = 1;
+        matrixB(1, 0) = 1;
+        matrixB(1, 1) = 1;
+        matrixB(1, 2) = 1;
+        matrixB(2, 0) = 1;
+        matrixB(2, 1) = 1;
+        matrixB(2, 2) = 1;
+
+        matrixC(0, 0) = -1;
+        matrixC(0, 1) = -1;
+        matrixC(0, 2) = -1;
+        matrixC(1, 0) = -1;
+        matrixC(1, 1) = -1;
+        matrixC(1, 2) = -1;
+        matrixC(2, 0) = -1;
+        matrixC(2, 1) = -1;
+        matrixC(2, 2) = -1;
+    }
+};
+
+TEST_F(SubMatrix1, test1) {
+    matrixA -= matrixB;
+    ASSERT_TRUE(matrixA.EqMatrix(matrixC));
+}
+
+TEST_F(SubMatrix1, test2) {
+    ASSERT_TRUE((matrixA - matrixB).EqMatrix(matrixC));
+}
+
+TEST(SubErrorTest, test1) {
+    S21Matrix matrixA = S21Matrix(2, 3);
+    S21Matrix matrixB = S21Matrix(3, 3);
+    ASSERT_ANY_THROW(matrixA - matrixB);
+}
+
+TEST(InverseTest, test1) {
+    S21Matrix matrixA(1, 1);
+    S21Matrix matrixB(1, 1);
+
+    matrixA(0, 0) = 1.25;
+    matrixB(0, 0) = 0.8;
+
+    ASSERT_TRUE(matrixA.InverseMatrix().EqMatrix(matrixB));
+}
+
+TEST(InverseTest, test2) {
+    S21Matrix matrixA(3, 3);
+    S21Matrix matrixB(3, 3);
+
+    matrixA(0, 0) = 2;
+    matrixA(0, 1) = 5;
+    matrixA(0, 2) = 7;
+    matrixA(1, 0) = 6;
+    matrixA(1, 1) = 3;
+    matrixA(1, 2) = 4;
+    matrixA(2, 0) = 5;
+    matrixA(2, 1) = -2;
+    matrixA(2, 2) = -3;
+
+    matrixB(0, 0) = 1;
+    matrixB(0, 1) = -1;
+    matrixB(0, 2) = 1;
+    matrixB(1, 0) = -38;
+    matrixB(1, 1) = 41;
+    matrixB(1, 2) = -34;
+    matrixB(2, 0) = 27;
+    matrixB(2, 1) = -29;
+    matrixB(2, 2) = 24;
+
+    ASSERT_TRUE(matrixA.InverseMatrix().EqMatrix(matrixB));
+}
+
+TEST(ErrorInverseTest, test1) {
+    S21Matrix matrixA(1, 3);
+
+    ASSERT_ANY_THROW((void)matrixA.InverseMatrix());
+}
+
+TEST(ErrorInverseTest, test2) {
+    S21Matrix matrixA(0, 0);
+    S21Matrix matrixB(0, 0);
+
+    ASSERT_ANY_THROW((void)matrixA.InverseMatrix());
+}
+
+TEST(ErrorInverseTest, test3) {
+    S21Matrix matrixA(2, 2);
+    ASSERT_ANY_THROW((void)matrixA.InverseMatrix());
+}
+
+TEST(ErrorAny, test1) {
+    S21Matrix matrix(1, 1);
+
+    ASSERT_ANY_THROW(matrix(0, 1));
+}
+
+TEST(ErrorAny, test2) {
+    S21Matrix matrix(1, 1);
+
+    ASSERT_ANY_THROW(matrix(-1, -1));
+}
+
+TEST(ErrorAny, test3) {
+    S21Matrix matrix(1, 1);
+
+    ASSERT_ANY_THROW(matrix(1, 1));
+}
+
+TEST(ErrorAny, test4) {
+    const S21Matrix matrix(1, 1);
+
+    ASSERT_ANY_THROW(matrix(0, 1));
+}
+
+TEST(ErrorAny, test5) {
+    const S21Matrix matrix(1, 1);
+
+    ASSERT_ANY_THROW(matrix(-1, -1));
+}
+
+TEST(ErrorAny, test6) {
+    const S21Matrix matrix(1, 1);
+
+    ASSERT_ANY_THROW(matrix(1, 1));
+}
+
+TEST(Any, test1) {
+    S21Matrix matrixA(2, 2);
+    matrixA(0, 0) = 1;
+    matrixA(0, 1) = 2;
+    matrixA(1, 0) = 3;
+    matrixA(1, 1) = 4;
+    S21Matrix matrixB(0, 0);
+
+    S21Matrix matrixC = matrixA;
+
+    matrixB = matrixA;
+
+    ASSERT_TRUE(matrixC.EqMatrix(matrixB));
+    matrixB(0, 0) = 11;
+    ASSERT_TRUE(matrixA.EqMatrix(matrixC));
 }

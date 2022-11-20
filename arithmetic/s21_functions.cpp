@@ -36,26 +36,26 @@ void S21Matrix::MulNumber(const double num)
             matrix_[i][j] = matrix_[i][j] * num;
 }
 
-int simple_mul(matrix_t *A, matrix_t *B, double *result,
-               unsigned int current_row, unsigned int current_column) {
-    int status = OK;
-    *result = 0.0;
-    for (int j = 0; j < A->columns; j++) {
-        *result =
-                A->matrix[current_row][j] * B->matrix[j][current_column] + *result;
+double S21Matrix::Simple_mul(const S21Matrix& other,
+                int current_row,  int current_column) {
+    double result = 0.0;
+    for (int j = 0; j < s21GetCols(); j++) {
+        result =
+                matrix_[current_row][j] * other.matrix_[j][current_column] + result;
     }
-    return status;
+    return result;
 }
 
 
 void S21Matrix::MulMatrix(const S21Matrix& other)
 {
-    int
-    for (int i = 0; i < s21GetCols(); i++)
+    this->KnowSize(other);
+    S21Matrix result(s21GetRows(), s21GetRows());
+    for (int i = 0; i < s21GetRows(); i++)
         for (int j = 0; j < s21GetRows(); j++) {
-            matrix_[i][j] = matrix_[i][j] * other.matrix_[i][j];
-            status = simple_mul(A, B, &result->matrix[i][j], i, j);
+            result.matrix_[i][j] = Simple_mul(other, i, j);
         }
+    this->CopyMatrix(result);
 }
 
 S21Matrix S21Matrix::Transpose()
@@ -86,10 +86,8 @@ void S21Matrix::Submatrix(const S21Matrix& other, int rows_copy, int columns_cop
     }
 }
 
-
-double S21Matrix::Determinant()
+double S21Matrix::MainDeterminant()
 {
-    KnowSquare();
     double result = 0.0;
     if (s21GetRows() == 1) {
         return matrix_[0][0];
@@ -99,20 +97,33 @@ double S21Matrix::Determinant()
         for (int x = 0; x < s21GetRows(); ++x) {
             S21Matrix copy(s21GetRows() - 1, s21GetCols() - 1);
             Submatrix(copy, 0, x);
-            result += (x % 2 == 0 ? 1 : -1) * matrix_[0][x] * copy.Determinant();
+            result += (x % 2 == 0 ? 1 : -1) * matrix_[0][x] * copy.MainDeterminant();
         }
     }
     return result;
 }
 
+double S21Matrix::Determinant()
+{
+    if (rows_ <= 0 || cols_ <= 0)
+        throw std::out_of_range(
+                "Incorrect input. Values must be greater than 0!!!");
+    KnowSquare();
+    return this->MainDeterminant();
+}
+
 S21Matrix S21Matrix::Minor() {
     S21Matrix minor_matrix(s21GetRows(), s21GetCols());
-    for (int i = 0; i < s21GetRows(); ++i)
-        for (int j = 0; j < s21GetCols(); ++j) {
-            S21Matrix copy(s21GetRows() - 1, s21GetCols() - 1);
-            Submatrix(copy, i, j);
-            minor_matrix.matrix_[i][j] = (((i + j)) % 2 == 0 ? 1 : -1) * copy.Determinant();
-        }
+    if (rows_ == cols_ && rows_ == 1) minor_matrix.matrix_[0][0] = matrix_[0][0];
+    else {
+        for (int i = 0; i < s21GetRows(); ++i)
+            for (int j = 0; j < s21GetCols(); ++j) {
+                S21Matrix copy(s21GetRows() - 1, s21GetCols() - 1);
+                Submatrix(copy, i, j);
+                minor_matrix.matrix_[i][j] = (((i + j)) % 2 == 0 ? 1 : -1) * copy.MainDeterminant();
+            }
+    }
+    minor_matrix.Printmatrix();
     return minor_matrix;
 }
 
@@ -120,27 +131,28 @@ S21Matrix S21Matrix::Minor() {
 S21Matrix S21Matrix::CalcComplements()
 {
     KnowSquare();
-    S21Matrix result( s21GetRows(), s21GetCols());
-    for (int i = 0; i < s21GetRows(); ++i)
-        for (int j = 0; j < s21GetCols(); ++j) {
-            S21Matrix copy( s21GetRows() - 1, s21GetCols() - 1);
-            Submatrix(copy, i, j);
-            result.matrix_[i][j] = (((i + j)) % 2 == 0 ? 1 : -1) *
-                                   copy.Determinant();
-        }
-    return result;
+    this->Printmatrix();
+    *this = Minor();
+    return (*this);
 }
 
 
 S21Matrix S21Matrix::InverseMatrix() // проверочки надо вставить
 {
     KnowSquare();
-    double status = Determinant();
-
+    double det = Determinant();
+    std::cout << det << std::endl;
+    if (fabs(det) < 1e-7)
+        throw std::logic_error(
+                "Determinant must be greater than 0.0");
     S21Matrix result(s21GetRows(), s21GetCols());
     result = Minor();
     result = result.Transpose();
-    result.MulNumber((double) 1 / status);
-
-    return result;
+    if (rows_ == cols_ && cols_ == 1) result.matrix_[0][0] = 1.0 /det;
+    else
+        result.MulNumber((double) 1.0 /det);
+    result.Printmatrix();
+    *this = result;
+    return (*this);
 }
+

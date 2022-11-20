@@ -1,13 +1,12 @@
-//
-// Created by stf20 on 26.10.2022.
-//
-
 #ifndef CPP1_S21_MATRIXPLUS_S21_MATRIX_H
 #define CPP1_S21_MATRIXPLUS_S21_MATRIX_H
 
 #include <iostream>
 #include <cmath>
 #include <stdexcept>
+#include <cstring>
+
+using namespace std;
 
 #define EPS (1e-6)
 
@@ -62,19 +61,31 @@ public:
     S21Matrix InverseMatrix();
 
     S21Matrix Minor();
+    double MainDeterminant();
 
     void KnowSize(const S21Matrix& other);
     void KnowSquare();
     void RightSize();
     void RightSize(int row, int col);
 
+    double Simple_mul(const S21Matrix& other,
+                                  int current_row,  int current_column);
     double &operator()(int i, int j)
     {
+        if (i >= rows_ || j >= cols_ || i < 0 || j < 0)
+            throw std::logic_error(
+                    "Out of matrix range");
+        return matrix_[i][j];
+    };
+    double &operator()(int i, int j) const
+    {
+        if (i >= rows_ || j >= cols_ || i < 0 || j < 0)
+            throw std::logic_error(
+                    "Out of matrix range");
         return matrix_[i][j];
     };
 
-    void MergeMatrix(const S21Matrix& other, int sign);
-    void Printmatrix() noexcept;
+//    void Printmatrix() noexcept;
 
     S21Matrix &operator=(S21Matrix &&other) noexcept; // оператор присваивания перемещением
     S21Matrix &operator=(const S21Matrix &other); // оператор присваивания копированием

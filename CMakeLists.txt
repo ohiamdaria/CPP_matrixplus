@@ -1,5 +1,3 @@
-
-
 cmake_minimum_required(VERSION 3.22)
 project(S21_matrix)
 
@@ -16,10 +14,9 @@ set(TESTFILE_FLAGS "")
 set(TEST_FLAGS -Wall -Werror -Wextra -Wpedantic -fsanitize=address -fsanitize=leak -fsanitize=undefined -g)
 set(COVERAGE_FLAGS --coverage)
 
-#add_executable(S21_matrix main.cpp s21_matrix_oop.h core/s21_constructors.cpp core/s21_accessor_mutator.cpp operators/s21_operators.cpp arithmetic/s21_functions.cpp comparison/s21_others.cpp)
-
-set(SOURCE core/s21_constructors.cpp core/s21_accessor_mutator.cpp operators/s21_operators.cpp arithmetic/s21_functions.cpp comparison/s21_others.cpp)
-set(TEST_SOURCE test/test_constructors.cpp test/test_functions.cpp)
+#set(SOURCE arithmetic/s21_functions.cpp comparison/s21_others.cpp core/s21_accessor_mutator.cpp core/s21_constructors.cpp operators/s21_operators.cpp)
+set(SOURCE s21_matrix_oop.cpp)
+set(TEST_SOURCE test/test_functions.cpp)
 
 if (CMAKE_BUILD_TYPE STREQUAL "TEST")
     set(MORE_CXX_FLAGS ${MORE_CXX_FLAGS} ${TEST_FLAGS} ${COVERAGE_FLAGS})

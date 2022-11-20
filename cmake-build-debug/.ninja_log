@@ -1,8 +1,8 @@
 # ninja log v5
-3	548	1668866228000000000	CMakeFiles/S21_matrix.dir/main.cpp.o	c44c7bceac1c296c
-3	613	1668857707000000000	CMakeFiles/S21_matrix.dir/operators/s21_operators.cpp.o	4fc553020e2637a0
-548	600	1668866228000000000	S21_matrix	ebc728cbe62213ec
-2	813	1668866100000000000	CMakeFiles/S21_matrix.dir/comparison/s21_others.cpp.o	9b6debc943c118ba
-3	1355	1668864808000000000	CMakeFiles/S21_matrix.dir/core/s21_accessor_mutator.cpp.o	5fff426284e93df
-2	1023	1668856757000000000	CMakeFiles/S21_matrix.dir/core/s21_constructors.cpp.o	799b8088852a0d07
-2	1022	1668856757000000000	CMakeFiles/S21_matrix.dir/arithmetic/s21_functions.cpp.o	5b294fa58d04a0ec
+1	1111	1668945653000000000	CMakeFiles/S21_matrix.dir/main.cpp.o	c44c7bceac1c296c
+2	1112	1668945653000000000	CMakeFiles/S21_matrix.dir/operators/s21_operators.cpp.o	4fc553020e2637a0
+1570	1763	1668946077000000000	S21_matrix	ebc728cbe62213ec
+4	1137	1668945653000000000	CMakeFiles/S21_matrix.dir/comparison/s21_others.cpp.o	9b6debc943c118ba
+2	1121	1668945653000000000	CMakeFiles/S21_matrix.dir/core/s21_accessor_mutator.cpp.o	5fff426284e93df
+1	1112	1668945653000000000	CMakeFiles/S21_matrix.dir/core/s21_constructors.cpp.o	799b8088852a0d07
+3	1570	1668946076000000000	CMakeFiles/S21_matrix.dir/arithmetic/s21_functions.cpp.o	5b294fa58d04a0ec

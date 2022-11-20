@@ -1,8 +1,9 @@
 {
+	"archive" : {},
 	"artifacts" : 
 	[
 		{
-			"path" : "tests"
+			"path" : "s21_matrix_oop.a"
 		}
 	],
 	"backtrace" : 1,
@@ -10,8 +11,8 @@
 	{
 		"commands" : 
 		[
-			"add_executable",
-			"target_link_libraries",
+			"add_library",
+			"target_compile_options",
 			"include_directories",
 			"target_compile_features"
 		],
@@ -27,25 +28,25 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 40,
+				"line" : 28,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 50,
+				"line" : 30,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 29,
+				"line" : 26,
 				"parent" : 0
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 41,
+				"line" : 31,
 				"parent" : 0
 			}
 		]
@@ -57,6 +58,10 @@
 			[
 				{
 					"fragment" : "-g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-std=c++17"
 				},
 				{
 					"fragment" : "-std=gnu++17"
@@ -84,45 +89,9 @@
 			]
 		}
 	],
-	"dependencies" : 
-	[
-		{
-			"backtrace" : 2,
-			"id" : "s21_matrix_oop::@6890427a1f51a3e7e1df"
-		}
-	],
-	"id" : "tests::@6890427a1f51a3e7e1df",
-	"link" : 
-	{
-		"commandFragments" : 
-		[
-			{
-				"fragment" : "-g",
-				"role" : "flags"
-			},
-			{
-				"fragment" : "",
-				"role" : "flags"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "s21_matrix_oop.a",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "/usr/local/lib/libgtest_main.a",
-				"role" : "libraries"
-			},
-			{
-				"fragment" : "/usr/local/lib/libgtest.a",
-				"role" : "libraries"
-			}
-		],
-		"language" : "CXX"
-	},
-	"name" : "tests",
-	"nameOnDisk" : "tests",
+	"id" : "s21_matrix_oop::@6890427a1f51a3e7e1df",
+	"name" : "s21_matrix_oop",
+	"nameOnDisk" : "s21_matrix_oop.a",
 	"paths" : 
 	{
 		"build" : ".",
@@ -143,9 +112,9 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "test/test_constructors.cpp",
+			"path" : "s21_matrix_oop.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],
-	"type" : "EXECUTABLE"
+	"type" : "STATIC_LIBRARY"
 }

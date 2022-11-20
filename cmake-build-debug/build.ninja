@@ -49,40 +49,12 @@ cmake_ninja_workdir = /Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug/
 
 build cmake_object_order_depends_target_s21_matrix_oop: phony || CMakeFiles/s21_matrix_oop.dir
 
-build CMakeFiles/s21_matrix_oop.dir/core/s21_constructors.cpp.o: CXX_COMPILER__s21_matrix_oop_Debug /Users/gloriagi/Desktop/CPP_matrixplus/core/s21_constructors.cpp || cmake_object_order_depends_target_s21_matrix_oop
-  DEP_FILE = CMakeFiles/s21_matrix_oop.dir/core/s21_constructors.cpp.o.d
+build CMakeFiles/s21_matrix_oop.dir/s21_matrix_oop.cpp.o: CXX_COMPILER__s21_matrix_oop_Debug /Users/gloriagi/Desktop/CPP_matrixplus/s21_matrix_oop.cpp || cmake_object_order_depends_target_s21_matrix_oop
+  DEP_FILE = CMakeFiles/s21_matrix_oop.dir/s21_matrix_oop.cpp.o.d
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=c++17 -std=gnu++17
   INCLUDES = -I/Users/gloriagi/Desktop/CPP_matrixplus/.
   OBJECT_DIR = CMakeFiles/s21_matrix_oop.dir
-  OBJECT_FILE_DIR = CMakeFiles/s21_matrix_oop.dir/core
-
-build CMakeFiles/s21_matrix_oop.dir/core/s21_accessor_mutator.cpp.o: CXX_COMPILER__s21_matrix_oop_Debug /Users/gloriagi/Desktop/CPP_matrixplus/core/s21_accessor_mutator.cpp || cmake_object_order_depends_target_s21_matrix_oop
-  DEP_FILE = CMakeFiles/s21_matrix_oop.dir/core/s21_accessor_mutator.cpp.o.d
-  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=c++17 -std=gnu++17
-  INCLUDES = -I/Users/gloriagi/Desktop/CPP_matrixplus/.
-  OBJECT_DIR = CMakeFiles/s21_matrix_oop.dir
-  OBJECT_FILE_DIR = CMakeFiles/s21_matrix_oop.dir/core
-
-build CMakeFiles/s21_matrix_oop.dir/operators/s21_operators.cpp.o: CXX_COMPILER__s21_matrix_oop_Debug /Users/gloriagi/Desktop/CPP_matrixplus/operators/s21_operators.cpp || cmake_object_order_depends_target_s21_matrix_oop
-  DEP_FILE = CMakeFiles/s21_matrix_oop.dir/operators/s21_operators.cpp.o.d
-  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=c++17 -std=gnu++17
-  INCLUDES = -I/Users/gloriagi/Desktop/CPP_matrixplus/.
-  OBJECT_DIR = CMakeFiles/s21_matrix_oop.dir
-  OBJECT_FILE_DIR = CMakeFiles/s21_matrix_oop.dir/operators
-
-build CMakeFiles/s21_matrix_oop.dir/arithmetic/s21_functions.cpp.o: CXX_COMPILER__s21_matrix_oop_Debug /Users/gloriagi/Desktop/CPP_matrixplus/arithmetic/s21_functions.cpp || cmake_object_order_depends_target_s21_matrix_oop
-  DEP_FILE = CMakeFiles/s21_matrix_oop.dir/arithmetic/s21_functions.cpp.o.d
-  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=c++17 -std=gnu++17
-  INCLUDES = -I/Users/gloriagi/Desktop/CPP_matrixplus/.
-  OBJECT_DIR = CMakeFiles/s21_matrix_oop.dir
-  OBJECT_FILE_DIR = CMakeFiles/s21_matrix_oop.dir/arithmetic
-
-build CMakeFiles/s21_matrix_oop.dir/comparison/s21_others.cpp.o: CXX_COMPILER__s21_matrix_oop_Debug /Users/gloriagi/Desktop/CPP_matrixplus/comparison/s21_others.cpp || cmake_object_order_depends_target_s21_matrix_oop
-  DEP_FILE = CMakeFiles/s21_matrix_oop.dir/comparison/s21_others.cpp.o.d
-  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=c++17 -std=gnu++17
-  INCLUDES = -I/Users/gloriagi/Desktop/CPP_matrixplus/.
-  OBJECT_DIR = CMakeFiles/s21_matrix_oop.dir
-  OBJECT_FILE_DIR = CMakeFiles/s21_matrix_oop.dir/comparison
+  OBJECT_FILE_DIR = CMakeFiles/s21_matrix_oop.dir
 
 
 # =============================================================================
@@ -92,7 +64,7 @@ build CMakeFiles/s21_matrix_oop.dir/comparison/s21_others.cpp.o: CXX_COMPILER__s
 #############################################
 # Link the static library s21_matrix_oop.a
 
-build s21_matrix_oop.a: CXX_STATIC_LIBRARY_LINKER__s21_matrix_oop_Debug CMakeFiles/s21_matrix_oop.dir/core/s21_constructors.cpp.o CMakeFiles/s21_matrix_oop.dir/core/s21_accessor_mutator.cpp.o CMakeFiles/s21_matrix_oop.dir/operators/s21_operators.cpp.o CMakeFiles/s21_matrix_oop.dir/arithmetic/s21_functions.cpp.o CMakeFiles/s21_matrix_oop.dir/comparison/s21_others.cpp.o
+build s21_matrix_oop.a: CXX_STATIC_LIBRARY_LINKER__s21_matrix_oop_Debug CMakeFiles/s21_matrix_oop.dir/s21_matrix_oop.cpp.o
   ARCH_FLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles/s21_matrix_oop.dir
@@ -110,8 +82,8 @@ build s21_matrix_oop.a: CXX_STATIC_LIBRARY_LINKER__s21_matrix_oop_Debug CMakeFil
 
 build cmake_object_order_depends_target_tests: phony || cmake_object_order_depends_target_s21_matrix_oop
 
-build CMakeFiles/tests.dir/test/test_constructors.cpp.o: CXX_COMPILER__tests_Debug /Users/gloriagi/Desktop/CPP_matrixplus/test/test_constructors.cpp || cmake_object_order_depends_target_tests
-  DEP_FILE = CMakeFiles/tests.dir/test/test_constructors.cpp.o.d
+build CMakeFiles/tests.dir/test/test_functions.cpp.o: CXX_COMPILER__tests_Debug /Users/gloriagi/Desktop/CPP_matrixplus/test/test_functions.cpp || cmake_object_order_depends_target_tests
+  DEP_FILE = CMakeFiles/tests.dir/test/test_functions.cpp.o.d
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++17
   INCLUDES = -I/Users/gloriagi/Desktop/CPP_matrixplus/.
   OBJECT_DIR = CMakeFiles/tests.dir
@@ -125,7 +97,7 @@ build CMakeFiles/tests.dir/test/test_constructors.cpp.o: CXX_COMPILER__tests_Deb
 #############################################
 # Link the executable tests
 
-build tests: CXX_EXECUTABLE_LINKER__tests_Debug CMakeFiles/tests.dir/test/test_constructors.cpp.o | s21_matrix_oop.a /usr/local/lib/libgtest_main.a /usr/local/lib/libgtest.a || s21_matrix_oop.a
+build tests: CXX_EXECUTABLE_LINKER__tests_Debug CMakeFiles/tests.dir/test/test_functions.cpp.o | s21_matrix_oop.a /usr/local/lib/libgtest_main.a /usr/local/lib/libgtest.a || s21_matrix_oop.a
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6
   LINK_LIBRARIES = s21_matrix_oop.a  /usr/local/lib/libgtest_main.a  /usr/local/lib/libgtest.a
   OBJECT_DIR = CMakeFiles/tests.dir

@@ -1,25 +1,18 @@
 #include "s21_matrix_oop.h"
 
 int main() {
-    S21Matrix m{4, 5};
-    m.AddMatrix(4.5);
-    m.Printmatrix();
+    S21Matrix matrixA(1, 1);
+    S21Matrix matrixB(1, 1);
 
-    std::cout << std::endl;
-    S21Matrix n;
-    n = m;
-    m.Printmatrix();
-    m.S21Resize(6, 6);
-    std::cout << std::endl;
-    n.Printmatrix();
-    std::cout << std::endl;
-    m.AddMatrix(666);
-    m.Printmatrix();
-    n = m;
-    std::cout << std::endl;
-    n.Printmatrix();
-    std::cout << std::endl;
+    matrixA(0, 0) = 1.25;
+
+    matrixA.Printmatrix();
+    matrixA.InverseMatrix();
+    matrixA.Printmatrix();
+//    std:: cout << matrixA.EqMatrix(matrixB) << std::endl;
 
 
     return 0;
 }
+
+
