@@ -1,0 +1,69 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.22"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "S21_matrix",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "s21_matrix_oop::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-s21_matrix_oop-Debug-af84e0dfbabe9056c6d8.json",
+					"name" : "s21_matrix_oop",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "tests::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-tests-Debug-f24d6942dee741181ddd.json",
+					"name" : "tests",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/dashakoroleva/Desktop/CPP_matrixplus/dublicate/cmake-build-debug",
+		"source" : "/Users/dashakoroleva/Desktop/CPP_matrixplus/dublicate"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

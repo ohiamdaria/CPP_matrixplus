@@ -17,8 +17,9 @@ S21Matrix::S21Matrix(const S21Matrix& other): rows_(other.rows_), cols_(other.co
 S21Matrix::S21Matrix(S21Matrix&& other) noexcept
 : rows_(other.rows_), cols_(other.cols_)
 {
-    RightSize();
-    *this = std::move(other);
+    this->CreateMatrix();
+    this->CopyMatrix(other);
+    other.DeleteMatrix();
 }
 
 S21Matrix::~S21Matrix()
@@ -67,11 +68,13 @@ void S21Matrix::S21Resize(int rows, int cols)
 
 bool S21Matrix::EqMatrix(const S21Matrix& other)
 {
-    if (!(rows_ == other.rows_ && cols_ == other.cols_)) return false;
+    if ((rows_ != other.rows_) || (cols_ != other.cols_)) return false;
     for (int i = 0; i < s21GetRows(); i++)
         for (int j = 0; j < s21GetCols(); j++)
-            if (fabs(matrix_[i][j] - other.matrix_[i][j]) > 1e-7)
+            if (fabs(matrix_[i][j] - other.matrix_[i][j]) > 1e-6) {
+                std::cout << '0';
                 return false;
+            }
     return true;
 }
 
@@ -122,10 +125,9 @@ void S21Matrix::MulMatrix(const S21Matrix& other)
 
 S21Matrix S21Matrix::Transpose()
 {
-    KnowSquare();
-    S21Matrix result( s21GetRows(), s21GetCols());
-    for (int i = 0; i < s21GetRows(); i++)
-        for (int j = 0; j < s21GetCols(); j++)
+    S21Matrix result( s21GetCols(), s21GetRows());
+    for (int i = 0; i < s21GetCols(); i++)
+        for (int j = 0; j < s21GetRows(); j++)
             result.matrix_[i][j] = matrix_[j][i];
     return result;
 }
@@ -230,7 +232,13 @@ S21Matrix &S21Matrix::operator=(const S21Matrix &other) // копировани�
 
 S21Matrix &S21Matrix::operator=(S21Matrix &&other) noexcept // перемещение
 {
-    *this = std::move(other);
+//    *this = std::move(other);
+    if (this == &other)
+        return (*this);
+    this->CopyMatrix(other);
+    other.DeleteMatrix();
+    return (*this);
+
 }
 
 S21Matrix S21Matrix::operator+(const S21Matrix &other) const
@@ -346,7 +354,7 @@ void S21Matrix::AddMatrix(double x)
 {
     for (int i = 0; i < rows_; i++)
         for (int j = 0; j < cols_; j++)
-            this->matrix_[i][j] = x++;
+            matrix_[i][j] = x + i * j;
 }
 
 void S21Matrix::KnowSize(const S21Matrix& other)

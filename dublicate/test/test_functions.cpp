@@ -14,23 +14,26 @@ TEST(ConstructTest, test5) {
     ASSERT_NO_THROW(S21Matrix n = std::move(m));// constr move
 }
 
-TEST(ConstructTest, test6) { ASSERT_NO_THROW(S21Matrix a(0, 100)); }
-
 class EqSimple : public ::testing::Test {
 protected:
     S21Matrix matrixA {3, 3};
     S21Matrix matrixB {3, 3};
 };
 
+TEST_F(EqSimple, A_eq_B) {
+    matrixA.AddMatrix(2.1231233);
+    matrixB.AddMatrix(2.1231233);
+    matrixA.Printmatrix();
+    matrixB.Printmatrix();
+    ASSERT_TRUE(matrixA.EqMatrix(matrixB)); }
+
 TEST_F(EqSimple, operator_eq) {
-    matrixA.AddMatrix(2.123);
-    matrixB.AddMatrix(2.123);
+    matrixA.AddMatrix(2.1231233);
+    matrixB.AddMatrix(2.1231233);
     ASSERT_TRUE(matrixA == matrixB);
 }
 
-TEST_F(EqSimple, A_eq_B) { ASSERT_TRUE(matrixA.EqMatrix(matrixB)); }
-
-TEST_F(EqSimple, B_eq_A) { ASSERT_TRUE(matrixB.EqMatrix(matrixA)); }
+//TEST_F(EqSimple, B_eq_A) { ASSERT_TRUE(matrixB.EqMatrix(matrixA)); }
 
 TEST_F(EqSimple, B_neq_A) {
     matrixA.AddMatrix(2.123);
@@ -100,20 +103,20 @@ TEST(TransposeTest, test2) {
     ASSERT_TRUE(matrixA.Transpose().EqMatrix(matrixB));
 }
 
-//TEST(TransposeTest, test3) {
-//    S21Matrix matrixA(1, 3);
-//    S21Matrix matrixB(3, 1);
-//
-//    matrixA(0, 0) = 1;
-//    matrixA(0, 1) = 2;
-//    matrixA(0, 2) = 3;
-//
-//    matrixB(0, 0) = 1;
-//    matrixB(1, 0) = 2;
-//    matrixB(2, 0) = 3;
-//
-//    ASSERT_TRUE(matrixA.Transpose().EqMatrix(matrixB));
-//}
+TEST(TransposeTest, test3) {
+    S21Matrix matrixA(1, 3);
+    S21Matrix matrixB(3, 1);
+
+    matrixA(0, 0) = 1;
+    matrixA(0, 1) = 2;
+    matrixA(0, 2) = 3;
+
+    matrixB(0, 0) = 1;
+    matrixB(1, 0) = 2;
+    matrixB(2, 0) = 3;
+
+    ASSERT_TRUE(matrixA.Transpose().EqMatrix(matrixB));
+}
 
 TEST(TransposeTest, test4) {
     S21Matrix matrixA(3, 3);

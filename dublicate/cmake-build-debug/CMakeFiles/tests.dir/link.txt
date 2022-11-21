@@ -1,0 +1,1 @@
+g++ -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/tests.dir/test/test_functions.cpp.o -o tests  s21_matrix_oop.a /opt/homebrew/lib/libgtest_main.a /opt/homebrew/lib/libgtest.a 

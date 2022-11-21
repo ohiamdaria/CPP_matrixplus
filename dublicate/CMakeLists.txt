@@ -1,3 +1,13 @@
+#cmake_minimum_required(VERSION 3.22)
+#project(S21_matrix)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#
+#
+#add_executable(S21Matrix main.cpp s21_matrix_oop.cpp)
+#
+
+
 cmake_minimum_required(VERSION 3.22)
 project(S21_matrix)
 
@@ -11,10 +21,9 @@ set(TARGET_TEST tests)
 
 set(MORE_CXX_FLAGS "-std=c++17")
 set(TESTFILE_FLAGS "")
-set(TEST_FLAGS -Wall -Werror -Wextra -Wpedantic -fsanitize=address -fsanitize=leak -fsanitize=undefined -g)
+set(TEST_FLAGS -Wall -Werror -Wextra -Wpedantic -g)
 set(COVERAGE_FLAGS --coverage)
 
-#set(SOURCE arithmetic/s21_functions.cpp comparison/s21_others.cpp core/s21_accessor_mutator.cpp core/s21_constructors.cpp operators/s21_operators.cpp)
 set(SOURCE s21_matrix_oop.cpp)
 set(TEST_SOURCE test/test_functions.cpp)
 

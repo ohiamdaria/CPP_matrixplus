@@ -8,12 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/gloriagi/Desktop/dublicate/test/test_functions.cpp" "CMakeFiles/tests.dir/test/test_functions.cpp.o" "gcc" "CMakeFiles/tests.dir/test/test_functions.cpp.o.d"
+  "/Users/dashakoroleva/Desktop/CPP_matrixplus/dublicate/test/test_functions.cpp" "CMakeFiles/tests.dir/test/test_functions.cpp.o" "gcc" "CMakeFiles/tests.dir/test/test_functions.cpp.o.d"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/Users/gloriagi/Desktop/dublicate/build/CMakeFiles/s21_matrix_oop.dir/DependInfo.cmake"
+  "/Users/dashakoroleva/Desktop/CPP_matrixplus/dublicate/build/CMakeFiles/s21_matrix_oop.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
