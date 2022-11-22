@@ -67,7 +67,7 @@ public:
     void KnowSquare();
     void RightSize();
     void RightSize(int row, int col);
-
+    void S21insertValues(int n, ...);
     double Simple_mul(const S21Matrix& other,
                                   int current_row,  int current_column);
     double &operator()(int i, int j)
@@ -85,7 +85,7 @@ public:
         return matrix_[i][j];
     };
 
-//    void Printmatrix() noexcept;
+    void Printmatrix() noexcept;
 
     S21Matrix &operator=(S21Matrix &&other) noexcept; // оператор присваивания перемещением
     S21Matrix &operator=(const S21Matrix &other); // оператор присваивания копированием

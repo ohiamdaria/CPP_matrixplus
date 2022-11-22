@@ -1,4 +1,0 @@
-/Users/dashakoroleva/Desktop/CPP_matrixplus/dublicate/build/CMakeFiles/s21_matrix_oop.dir
-/Users/dashakoroleva/Desktop/CPP_matrixplus/dublicate/build/CMakeFiles/tests.dir
-/Users/dashakoroleva/Desktop/CPP_matrixplus/dublicate/build/CMakeFiles/edit_cache.dir
-/Users/dashakoroleva/Desktop/CPP_matrixplus/dublicate/build/CMakeFiles/rebuild_cache.dir
