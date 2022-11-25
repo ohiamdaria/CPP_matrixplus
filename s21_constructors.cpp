@@ -8,15 +8,15 @@ S21Matrix::S21Matrix(int rows, int cols): rows_(rows), cols_(cols)
     this->CreateMatrix();
 }
 
-S21Matrix::S21Matrix(const S21Matrix& other): rows_(other.rows_), cols_(other.cols_)
+S21Matrix::S21Matrix(const S21Matrix& other)
 {
-    *this = other;
+    this->CopyMatrix(other);
 }
 
 S21Matrix::S21Matrix(S21Matrix&& other) noexcept
-        : rows_(other.rows_), cols_(other.cols_)
 {
-    *this = other;
+    this->CopyMatrix(other);
+    other.DeleteMatrix();
 }
 
 S21Matrix::~S21Matrix()

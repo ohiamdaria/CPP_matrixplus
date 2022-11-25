@@ -32,14 +32,14 @@ S21Matrix::~S21Matrix()
 }
 void S21Matrix::s21SetRows(int row)
 {
-    this->rows_ = row;
     S21Resize(row, cols_);
+    this->rows_ = row;
 }
 
 void S21Matrix::s21SetCols(int col)
 {
-    this->cols_ = col;
     S21Resize(rows_, col);
+    this->cols_ = col;
 }
 
 void S21Matrix::S21Resize(int rows, int cols)
@@ -114,10 +114,12 @@ double S21Matrix::Simple_mul(const S21Matrix& other,
 
 void S21Matrix::MulMatrix(const S21Matrix& other)
 {
-    this->KnowSize(other);
-    S21Matrix result(s21GetRows(), s21GetRows());
-    for (int i = 0; i < s21GetRows(); i++)
-        for (int j = 0; j < s21GetRows(); j++) {
+    if (cols_ != other.rows_)
+        throw std::logic_error(
+                "Different size of matrices");
+    S21Matrix result(rows_, other.cols_);
+    for (int i = 0; i < rows_; i++)
+        for (int j = 0; j < other.cols_; j++) {
             result.matrix_[i][j] = Simple_mul(other, i, j);
         }
     this->CopyMatrix(result);
@@ -203,7 +205,6 @@ S21Matrix S21Matrix::CalcComplements()
 
 S21Matrix S21Matrix::InverseMatrix() // проверочки надо вставить
 {
-    KnowSquare();
     double det = Determinant();
     std::cout << det << std::endl;
     if (fabs(det) < 1e-7)
@@ -269,7 +270,7 @@ S21Matrix S21Matrix::operator*(double num) const
     return res;
 }
 
-S21Matrix operator*(const double num, const S21Matrix &my) // как вызвать конструктор копирования и конструктор перемещения???
+S21Matrix operator*(const double num, const S21Matrix &my)
 {
     S21Matrix res {my};
     res.MulNumber(num);
@@ -278,8 +279,8 @@ S21Matrix operator*(const double num, const S21Matrix &my) // как вызва�
 
 bool S21Matrix::operator==(const S21Matrix &other) noexcept
 {
-bool status = this->EqMatrix(other);
-return status;
+    bool status = this->EqMatrix(other);
+    return status;
 }
 
 S21Matrix S21Matrix::operator+=(const S21Matrix &other)
@@ -308,7 +309,7 @@ S21Matrix S21Matrix::operator*=(double num)
 
 void S21Matrix::CopyMatrix(const S21Matrix &other)
 {
-    if (this->matrix_!= nullptr) this->DeleteMatrix();
+    this->DeleteMatrix();
     rows_ = other.rows_;
     cols_ = other.cols_;
     this->CreateMatrix();
@@ -360,7 +361,7 @@ void S21Matrix::AddMatrix(double x)
 void S21Matrix::KnowSize(const S21Matrix& other)
 {
     if (!((rows_ == other.rows_ && cols_ == other.cols_)
-          || (rows_ == other.cols_ && cols_ == other.rows_)))
+          && (rows_ == other.cols_ && cols_ == other.rows_)))
         throw std::logic_error(
                 "Different size of matrices");
 }

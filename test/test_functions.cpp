@@ -733,6 +733,9 @@ TEST(MulMatrix, Test_1) {
     c.S21insertValues(12, 11., 14., 17., 20., 23., 30., 37., 44., 35., 46., 57.,
                       68.);
     a *= b;
+    a.Printmatrix();
+    std::cout << std::endl;
+    c.Printmatrix();
     EXPECT_TRUE(a.EqMatrix(c));
 }
 
@@ -793,16 +796,19 @@ TEST(Determinant, Test_2) {
 }
 
 TEST(InverseMatrix, Test_1) {
-    S21Matrix a, c;
+    S21Matrix a{3, 3}, c{3, 3};
     a.S21insertValues(9, 1., 2., 3., 4., 5., 6., 7., 8., 1.);
     c.S21insertValues(9, (-43. / 24.), (11. / 12.), (-1. / 8.), (19. / 12.),
                       (-5. / 6.), (1. / 4.), (-1. / 8.), (1. / 4.), (-1. / 8.));
     a = a.InverseMatrix();
+    a.Printmatrix();
+    std::cout << std::endl;
+    c.Printmatrix();
     EXPECT_TRUE(a.EqMatrix(c));
 }
 
 TEST(InverseMatrix, Test_2) {
-    S21Matrix a;
+    S21Matrix a{3, 3};
     a.S21insertValues(9, 1., 2., 3., 4., 5., 6., 7., 8., 9.);
     EXPECT_ANY_THROW({ a.InverseMatrix(); });
 }
@@ -817,7 +823,7 @@ TEST(InverseMatrix, Test_3) {
 }
 
 TEST(Index, Test_1) {
-    S21Matrix a;
+    S21Matrix a{3, 3};
     a.S21insertValues(9, 1., 2., 3., 4., 5., 6., 7., 8., 9.);
     EXPECT_DOUBLE_EQ(a(0, 0), 1.);
     EXPECT_ANY_THROW({ a(3, 2); });
@@ -825,7 +831,7 @@ TEST(Index, Test_1) {
 }
 
 TEST(Index2, Test_1) {
-    S21Matrix a;
+    S21Matrix a{3, 3};
     a.S21insertValues(9, 1., 2., 3., 4., 5., 6., 7., 8., 9.);
     EXPECT_DOUBLE_EQ(a(0, 0), 1.);
     EXPECT_ANY_THROW({ a(3, 2); });
@@ -859,28 +865,28 @@ TEST(SetCols, Test_1) {
     EXPECT_EQ(a.s21GetCols(), 3);
 }
 
-//TEST(SetRows, Test_1) {
-//    S21Matrix a(3, 3), c(2, 3), d(3, 3);
-//    a.S21insertValues(9, 1., 2., 3., 4., 5., 6., 7., 8., 9.);
-//    c.S21insertValues(9, 1., 2., 3., 4., 5., 6.);
-//    a.s21SetRows(2);
-//    EXPECT_TRUE(a == c);
-//    EXPECT_EQ(a.s21GetRows(), 2);
-//
-//    a.s21SetRows(3);
-//    d.S21insertValues(9, 1., 2., 3., 4., 5., 6., 0., 0., 0.);
-//    EXPECT_TRUE(a == d);
-//    EXPECT_EQ(a.s21GetRows(), 3);
-//}
-//
-//TEST(ConstructorMove, Test_1) {
-//    S21Matrix a;
-//    a.S21insertValues(8, 1., 2., 3., 4., 5., 6., 7., 8.);
-//    S21Matrix c(a);
-//    S21Matrix b = (S21Matrix &&) a;
-//    EXPECT_EQ(a.s21GetCols(), 0);
-//    EXPECT_TRUE(b.EqMatrix(c));
-//}
+TEST(SetRows, Test_1) {
+    S21Matrix a(3, 3), c(2, 3), d(3, 3);
+    a.S21insertValues(9, 1., 2., 3., 4., 5., 6., 7., 8., 9.);
+    c.S21insertValues(9, 1., 2., 3., 4., 5., 6.);
+    a.s21SetRows(2);
+    EXPECT_TRUE(a == c);
+    EXPECT_EQ(a.s21GetRows(), 2);
+
+    a.s21SetRows(3);
+    d.S21insertValues(9, 1., 2., 3., 4., 5., 6., 0., 0., 0.);
+    EXPECT_TRUE(a == d);
+    EXPECT_EQ(a.s21GetRows(), 3);
+}
+
+TEST(ConstructorMove, Test_1) {
+    S21Matrix a{2, 4};
+    a.S21insertValues(8, 1., 2., 3., 4., 5., 6., 7., 8.);
+    S21Matrix c(a);
+    S21Matrix b = (S21Matrix &&) a;
+    EXPECT_EQ(a.s21GetCols(), 0);
+    EXPECT_TRUE(b.EqMatrix(c));
+}
 
 int main(int argc, char **argv) {
 
