@@ -19,8 +19,8 @@ private:
 
 public:
 
-     int s21GetRows() { return rows_; }
-     int s21GetCols() { return cols_; }
+     int s21GetRows();
+     int s21GetCols();
     void s21SetRows(int row);
     void s21SetCols(int col);
 
@@ -66,7 +66,7 @@ public:
     void KnowSize(const S21Matrix& other);
     void KnowSquare();
     void RightSize();
-    void RightSize(int row, int col);
+
     void S21insertValues(int n, ...);
     double Simple_mul(const S21Matrix& other,
                                   int current_row,  int current_column);

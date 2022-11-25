@@ -30,6 +30,11 @@ S21Matrix::~S21Matrix()
     }
 
 }
+
+int S21Matrix::s21GetRows() { return rows_; }
+
+int S21Matrix::s21GetCols() { return cols_; }
+
 void S21Matrix::s21SetRows(int row)
 {
     S21Resize(row, cols_);
@@ -44,7 +49,6 @@ void S21Matrix::s21SetCols(int col)
 
 void S21Matrix::S21Resize(int rows, int cols)
 {
-    RightSize(rows, cols);
     S21Matrix result (rows, cols);
     for (int i = 0; i < rows; i++) {
         if (i < s21GetRows())
@@ -224,8 +228,7 @@ S21Matrix S21Matrix::InverseMatrix() // проверочки надо встав
 
 S21Matrix &S21Matrix::operator=(const S21Matrix &other) // копирование
 {
-    if (this == &other)
-        return (*this);
+    if (this == &other) return (*this);
 
     this->CopyMatrix(other);
     return (*this);
@@ -234,8 +237,7 @@ S21Matrix &S21Matrix::operator=(const S21Matrix &other) // копировани�
 S21Matrix &S21Matrix::operator=(S21Matrix &&other) noexcept // перемещение
 {
 //    *this = std::move(other);
-    if (this == &other)
-        return (*this);
+    if (this == &other) return (*this);
     this->CopyMatrix(other);
     other.DeleteMatrix();
     return (*this);
@@ -378,10 +380,3 @@ void S21Matrix::RightSize() {
         throw std::out_of_range(
                 "Incorrect input. Values must be greater than 0");
 }
-void S21Matrix::RightSize(int row, int col) {
-    if (row < 0 || col < 0)
-        throw std::out_of_range(
-                "Incorrect input. Values must be greater than 0");
-}
-
-
