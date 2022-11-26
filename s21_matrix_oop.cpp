@@ -15,9 +15,9 @@ S21Matrix::S21Matrix(const S21Matrix& other): rows_(other.rows_), cols_(other.co
 }
 
 S21Matrix::S21Matrix(S21Matrix&& other) noexcept
-: rows_(other.rows_), cols_(other.cols_)
 {
-    *this = std::move(other);
+    *this = other;
+    other.DeleteMatrix();
 }
 
 S21Matrix::~S21Matrix() noexcept
@@ -237,7 +237,7 @@ S21Matrix &S21Matrix::operator=(S21Matrix &&other) noexcept // перемеще�
     std::swap(rows_, other.rows_);
     std::swap(cols_, other.cols_);
     std::swap(matrix_, other.matrix_);
-    if (other.matrix_ != nullptr) other.DeleteMatrix();
+    other.DeleteMatrix();
     return (*this);
 
 }
@@ -333,7 +333,7 @@ void S21Matrix::CreateMatrix()
 void S21Matrix::DeleteMatrix()
 {
     if (rows_ > 0 && cols_ > 0) {
-        for (rows_--; rows_ >= 0; rows_--) delete[] matrix_[rows_];
+        for (int i = rows_ - 1; i >= 0; i--) delete[] matrix_[i];
         delete[] matrix_;
     }
     matrix_ = nullptr;
