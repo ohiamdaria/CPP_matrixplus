@@ -6,8 +6,6 @@
 #include <stdexcept>
 #include <cstring>
 
-using namespace std;
-
 #define EPS (1e-6)
 
 
@@ -19,8 +17,8 @@ private:
 
 public:
 
-     int s21GetRows();
-     int s21GetCols();
+     int s21GetRows() const noexcept;
+     int s21GetCols() const noexcept;
     void s21SetRows(int row);
     void s21SetCols(int col);
 
@@ -28,7 +26,7 @@ public:
     S21Matrix(int rows, int cols);
     S21Matrix(const S21Matrix& other);
     S21Matrix(S21Matrix&& other) noexcept;
-    ~S21Matrix();
+    ~S21Matrix() noexcept;
 
     void CreateMatrix();
 
@@ -46,7 +44,7 @@ public:
 
     void SubMatrix(const S21Matrix& other);
 
-    void Submatrix(const S21Matrix& other, int rows_copy, int columns_copy);
+    void CropMatrix(const S21Matrix& other, int rows_copy, int columns_copy);
 
     void MulMatrix(const S21Matrix& other);
 
@@ -65,7 +63,6 @@ public:
 
     void KnowSize(const S21Matrix& other);
     void KnowSquare();
-    void RightSize();
 
     void S21insertValues(int n, ...);
     double Simple_mul(const S21Matrix& other,
@@ -77,7 +74,8 @@ public:
                     "Out of matrix range");
         return matrix_[i][j];
     };
-    double &operator()(int i, int j) const
+
+    const double &operator()(const int i, const int j) const
     {
         if (i >= rows_ || j >= cols_ || i < 0 || j < 0)
             throw std::logic_error(

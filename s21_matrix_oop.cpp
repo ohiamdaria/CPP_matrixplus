@@ -4,36 +4,36 @@ S21Matrix::S21Matrix() : rows_(0), cols_(0), matrix_(nullptr) {}
 
 S21Matrix::S21Matrix(int rows, int cols): rows_(rows), cols_(cols)
 {
-    RightSize();
+    if (rows_ < 0 || cols_ < 0)
+        throw std::out_of_range("Incorrect input. Values must be greater than 0");
     this->CreateMatrix();
 }
 
 S21Matrix::S21Matrix(const S21Matrix& other): rows_(other.rows_), cols_(other.cols_)
 {
-    this->CreateMatrix();
     this->CopyMatrix(other);
 }
 
 S21Matrix::S21Matrix(S21Matrix&& other) noexcept
 : rows_(other.rows_), cols_(other.cols_)
 {
-    this->CreateMatrix();
-    this->CopyMatrix(other);
-    other.DeleteMatrix();
+    *this = std::move(other);
 }
 
-S21Matrix::~S21Matrix()
+S21Matrix::~S21Matrix() noexcept
 {
     if (rows_ > 0 && cols_ > 0) {
-        for (rows_--; rows_ > 0; rows_--) delete[] matrix_[rows_];
+        for (rows_--; rows_ >= 0; rows_--) delete[] matrix_[rows_];
         delete[] matrix_;
     }
-
+    matrix_ = nullptr;
+    cols_ = 0;
+    rows_ = 0;
 }
 
-int S21Matrix::s21GetRows() { return rows_; }
+int S21Matrix::s21GetRows() const noexcept { return rows_; }
 
-int S21Matrix::s21GetCols() { return cols_; }
+int S21Matrix::s21GetCols() const noexcept { return cols_; }
 
 void S21Matrix::s21SetRows(int row)
 {
@@ -66,7 +66,7 @@ void S21Matrix::S21Resize(int rows, int cols)
             }
         }
     }
-    (*this) = result;
+    *this = std::move(result);
 }
 
 
@@ -119,14 +119,14 @@ double S21Matrix::Simple_mul(const S21Matrix& other,
 void S21Matrix::MulMatrix(const S21Matrix& other)
 {
     if (cols_ != other.rows_)
-        throw std::logic_error(
-                "Different size of matrices");
+        throw std::logic_error("Different size of matrices");
     S21Matrix result(rows_, other.cols_);
     for (int i = 0; i < rows_; i++)
         for (int j = 0; j < other.cols_; j++) {
             result.matrix_[i][j] = Simple_mul(other, i, j);
         }
     this->CopyMatrix(result);
+    result.DeleteMatrix();
 }
 
 S21Matrix S21Matrix::Transpose()
@@ -138,7 +138,7 @@ S21Matrix S21Matrix::Transpose()
     return result;
 }
 
-void S21Matrix::Submatrix(const S21Matrix& other, int rows_copy, int columns_copy) {
+void S21Matrix::CropMatrix(const S21Matrix& other, int rows_copy, int columns_copy) {
     int subi = 0;
     for (int i = 0; i < s21GetRows(); i++) {
         int subj = 0;
@@ -166,8 +166,9 @@ double S21Matrix::MainDeterminant()
     } else {
         for (int x = 0; x < s21GetRows(); ++x) {
             S21Matrix copy(s21GetRows() - 1, s21GetCols() - 1);
-            Submatrix(copy, 0, x);
+            CropMatrix(copy, 0, x);
             result += (x % 2 == 0 ? 1 : -1) * matrix_[0][x] * copy.MainDeterminant();
+            copy.DeleteMatrix();
         }
     }
     return result;
@@ -176,8 +177,7 @@ double S21Matrix::MainDeterminant()
 double S21Matrix::Determinant()
 {
     if (rows_ <= 0 || cols_ <= 0)
-        throw std::out_of_range(
-                "Incorrect input. Values must be greater than 0!!!");
+        throw std::out_of_range("Incorrect input. Values must be greater than 0");
     KnowSquare();
     return this->MainDeterminant();
 }
@@ -189,11 +189,12 @@ S21Matrix S21Matrix::Minor() {
         for (int i = 0; i < s21GetRows(); ++i)
             for (int j = 0; j < s21GetCols(); ++j) {
                 S21Matrix copy(s21GetRows() - 1, s21GetCols() - 1);
-                Submatrix(copy, i, j);
+                CropMatrix(copy, i, j);
                 minor_matrix.matrix_[i][j] = (((i + j)) % 2 == 0 ? 1 : -1) * copy.MainDeterminant();
+                copy.DeleteMatrix();
             }
     }
-    minor_matrix.Printmatrix();
+
     return minor_matrix;
 }
 
@@ -207,39 +208,36 @@ S21Matrix S21Matrix::CalcComplements()
 }
 
 
-S21Matrix S21Matrix::InverseMatrix() // проверочки надо вставить
+S21Matrix S21Matrix::InverseMatrix()
 {
     double det = Determinant();
-    std::cout << det << std::endl;
     if (fabs(det) < 1e-7)
-        throw std::logic_error(
-                "Determinant must be greater than 0.0");
+        throw std::logic_error("Determinant must be greater than 0.0");
+
     S21Matrix result(s21GetRows(), s21GetCols());
     result = Minor();
     result = result.Transpose();
     if (rows_ == cols_ && cols_ == 1) result.matrix_[0][0] = 1.0 /det;
     else
         result.MulNumber((double) 1.0 /det);
-    result.Printmatrix();
-    *this = result;
-    return (*this);
+
+    return result;
 }
 
 
 S21Matrix &S21Matrix::operator=(const S21Matrix &other) // копирование
 {
     if (this == &other) return (*this);
-
     this->CopyMatrix(other);
     return (*this);
 }
 
 S21Matrix &S21Matrix::operator=(S21Matrix &&other) noexcept // перемещение
 {
-//    *this = std::move(other);
-    if (this == &other) return (*this);
-    this->CopyMatrix(other);
-    other.DeleteMatrix();
+    std::swap(rows_, other.rows_);
+    std::swap(cols_, other.cols_);
+    std::swap(matrix_, other.matrix_);
+    if (other.matrix_ != nullptr) other.DeleteMatrix();
     return (*this);
 
 }
@@ -311,7 +309,6 @@ S21Matrix S21Matrix::operator*=(double num)
 
 void S21Matrix::CopyMatrix(const S21Matrix &other)
 {
-    this->DeleteMatrix();
     rows_ = other.rows_;
     cols_ = other.cols_;
     this->CreateMatrix();
@@ -341,6 +338,7 @@ void S21Matrix::DeleteMatrix()
     }
     matrix_ = nullptr;
     cols_ = 0;
+    rows_ = 0;
 }
 
 void S21Matrix::Printmatrix() noexcept
@@ -362,21 +360,12 @@ void S21Matrix::AddMatrix(double x)
 
 void S21Matrix::KnowSize(const S21Matrix& other)
 {
-    if (!((rows_ == other.rows_ && cols_ == other.cols_)
-          && (rows_ == other.cols_ && cols_ == other.rows_)))
-        throw std::logic_error(
-                "Different size of matrices");
+    if (rows_ != other.rows_ || cols_ != other.cols_)
+        throw std::logic_error("Different size of matrices");
 }
 
 void S21Matrix::KnowSquare()
 {
     if (s21GetRows() != s21GetCols())
-        throw std::logic_error(
-                "It's not a square matrix");
-}
-
-void S21Matrix::RightSize() {
-    if (rows_ < 0 || cols_ < 0)
-        throw std::out_of_range(
-                "Incorrect input. Values must be greater than 0");
+        throw std::logic_error("It's not a square matrix");
 }
