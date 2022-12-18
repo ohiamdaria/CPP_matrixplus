@@ -17,8 +17,7 @@
 					],
 					"linkDirectories" : 
 					[
-						"/usr/local/Cellar/check/0.15.2/lib",
-						"/usr/local/lib",
+						"/opt/homebrew/lib",
 						"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/lib"
 					],
 					"linkFrameworkDirectories" : 
@@ -53,8 +52,7 @@
 					],
 					"linkDirectories" : 
 					[
-						"/usr/local/Cellar/check/0.15.2/lib",
-						"/usr/local/lib",
+						"/opt/homebrew/lib",
 						"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/lib"
 					],
 					"linkFrameworkDirectories" : 

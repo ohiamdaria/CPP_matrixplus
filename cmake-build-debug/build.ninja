@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /Users/gloriagi/Desktop/my/cmake-build-debug/
+cmake_ninja_workdir = /Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug/
 # =============================================================================
 # Object build statements for STATIC_LIBRARY target s21_matrix_oop
 
@@ -49,10 +49,10 @@ cmake_ninja_workdir = /Users/gloriagi/Desktop/my/cmake-build-debug/
 
 build cmake_object_order_depends_target_s21_matrix_oop: phony || CMakeFiles/s21_matrix_oop.dir
 
-build CMakeFiles/s21_matrix_oop.dir/s21_matrix_oop.cpp.o: CXX_COMPILER__s21_matrix_oop_Debug /Users/gloriagi/Desktop/my/s21_matrix_oop.cpp || cmake_object_order_depends_target_s21_matrix_oop
+build CMakeFiles/s21_matrix_oop.dir/s21_matrix_oop.cpp.o: CXX_COMPILER__s21_matrix_oop_Debug /Users/gloriagi/Desktop/CPP_matrixplus/s21_matrix_oop.cpp || cmake_object_order_depends_target_s21_matrix_oop
   DEP_FILE = CMakeFiles/s21_matrix_oop.dir/s21_matrix_oop.cpp.o.d
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=c++17 -std=gnu++17
-  INCLUDES = -I/Users/gloriagi/Desktop/my/.
+  INCLUDES = -I/Users/gloriagi/Desktop/CPP_matrixplus/.
   OBJECT_DIR = CMakeFiles/s21_matrix_oop.dir
   OBJECT_FILE_DIR = CMakeFiles/s21_matrix_oop.dir
 
@@ -82,10 +82,10 @@ build s21_matrix_oop.a: CXX_STATIC_LIBRARY_LINKER__s21_matrix_oop_Debug CMakeFil
 
 build cmake_object_order_depends_target_tests: phony || cmake_object_order_depends_target_s21_matrix_oop
 
-build CMakeFiles/tests.dir/tests/test_functions.cpp.o: CXX_COMPILER__tests_Debug /Users/gloriagi/Desktop/my/tests/test_functions.cpp || cmake_object_order_depends_target_tests
+build CMakeFiles/tests.dir/tests/test_functions.cpp.o: CXX_COMPILER__tests_Debug /Users/gloriagi/Desktop/CPP_matrixplus/tests/test_functions.cpp || cmake_object_order_depends_target_tests
   DEP_FILE = CMakeFiles/tests.dir/tests/test_functions.cpp.o.d
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++17
-  INCLUDES = -I/Users/gloriagi/Desktop/my/.
+  INCLUDES = -I/Users/gloriagi/Desktop/CPP_matrixplus/.
   OBJECT_DIR = CMakeFiles/tests.dir
   OBJECT_FILE_DIR = CMakeFiles/tests.dir/tests
 
@@ -111,7 +111,7 @@ build tests: CXX_EXECUTABLE_LINKER__tests_Debug CMakeFiles/tests.dir/tests/test_
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/gloriagi/Desktop/my/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -122,7 +122,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/gloriagi/Desktop/my/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/gloriagi/Desktop/my -B/Users/gloriagi/Desktop/my/cmake-build-debug
+  COMMAND = cd /Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/gloriagi/Desktop/CPP_matrixplus -B/Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -140,7 +140,7 @@ build s21_matrix_oop: phony s21_matrix_oop.a
 # =============================================================================
 
 #############################################
-# Folder: /Users/gloriagi/Desktop/my/cmake-build-debug
+# Folder: /Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug
 
 build all: phony s21_matrix_oop.a tests
 

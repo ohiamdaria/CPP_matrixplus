@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/gloriagi/Desktop/my/cmake-build-debug"
+			"value" : "/Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -539,7 +539,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/gloriagi/Desktop/my"
+			"value" : "/Users/gloriagi/Desktop/CPP_matrixplus"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -1215,7 +1215,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/gloriagi/Desktop/my/cmake-build-debug"
+			"value" : "/Users/gloriagi/Desktop/CPP_matrixplus/cmake-build-debug"
 		},
 		{
 			"name" : "S21_matrix_IS_TOP_LEVEL",
@@ -1239,7 +1239,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/gloriagi/Desktop/my"
+			"value" : "/Users/gloriagi/Desktop/CPP_matrixplus"
 		}
 	],
 	"kind" : "cache",

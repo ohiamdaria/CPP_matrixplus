@@ -64,7 +64,7 @@ public:
     void KnowSize(const S21Matrix& other);
     void KnowSquare();
 
-    void S21insertValues(int n, ...);
+    void InsertValues(int n, ...);
     double Simple_mul(const S21Matrix& other,
                                   int current_row,  int current_column);
     double &operator()(int i, int j)

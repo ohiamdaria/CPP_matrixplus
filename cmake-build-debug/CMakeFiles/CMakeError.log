@@ -5,6 +5,7 @@ Id flags:
 
 The output was:
 1
+ld: warning: directory not found for option '-L/opt/homebrew/lib'
 ld: library not found for -lSystem
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 
@@ -16,6 +17,7 @@ Id flags:
 
 The output was:
 1
+ld: warning: directory not found for option '-L/opt/homebrew/lib'
 ld: library not found for -lc++
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 
