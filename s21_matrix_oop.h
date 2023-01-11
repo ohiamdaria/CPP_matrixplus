@@ -93,7 +93,7 @@ class S21Matrix {
   S21Matrix operator+=(const S21Matrix &other);
   S21Matrix operator-=(const S21Matrix &other);
   S21Matrix operator*=(const S21Matrix &other);
-  S21Matrix operator*=(double num);
+  void operator*=(double num);
 };
 
 

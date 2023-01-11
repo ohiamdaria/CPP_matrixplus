@@ -273,9 +273,8 @@ S21Matrix S21Matrix::operator*=(const S21Matrix &other) {
   return (*this);
 }
 
-S21Matrix S21Matrix::operator*=(double num) {
+void S21Matrix::operator*=(double num) {
   this->MulNumber(num);
-  return (*this);
 }
 
 void S21Matrix::CopyMatrix(const S21Matrix &other) {

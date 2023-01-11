@@ -529,7 +529,6 @@ TEST(MulNumber2, Test_1) {
     a.InsertValues(9, 1., 2., 3., 4., 5., 6., 7., 8., 9.);
     c.InsertValues(9, 0., 0., 0., 0., 0., 0., 0., 0., 0.);
     a = a * 0.;
-    std::cout<<std::endl;
     EXPECT_TRUE(a.EqMatrix(c));
 }
 
