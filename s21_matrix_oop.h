@@ -13,11 +13,15 @@ class S21Matrix {
   int rows_, cols_;
   double **matrix_;
 
+  double Simple_mul(const S21Matrix &other, int current_row,
+                  int current_column);
+
+
  public:
-  int s21GetRows() const noexcept;
-  int s21GetCols() const noexcept;
-  void s21SetRows(int row);
-  void s21SetCols(int col);
+  int get_rows() const noexcept;
+  int get_cols() const noexcept;
+  void set_rows(int row);
+  void set_cols(int col);
 
   S21Matrix();
   S21Matrix(int rows, int cols);
@@ -62,8 +66,7 @@ class S21Matrix {
   void KnowSquare();
 
   void InsertValues(int n, ...);
-  double Simple_mul(const S21Matrix &other, int current_row,
-                    int current_column);
+
   double &operator()(int i, int j) {
     if (i >= rows_ || j >= cols_ || i < 0 || j < 0)
       throw std::logic_error("Out of matrix range");
@@ -76,8 +79,6 @@ class S21Matrix {
     return matrix_[i][j];
   };
 
-  void Printmatrix() noexcept;
-
   S21Matrix &operator=(
       S21Matrix &&other) noexcept;  // оператор присваивания перемещением
   S21Matrix &operator=(
@@ -87,6 +88,7 @@ class S21Matrix {
   S21Matrix operator-(const S21Matrix &other) const;
   S21Matrix operator*(const S21Matrix &other) const;
   S21Matrix operator*(const double num) const;
+  friend S21Matrix operator*(const double num, const S21Matrix &my);
   bool operator==(const S21Matrix &other) noexcept;
   S21Matrix operator+=(const S21Matrix &other);
   S21Matrix operator-=(const S21Matrix &other);
@@ -94,6 +96,6 @@ class S21Matrix {
   S21Matrix operator*=(double num);
 };
 
-S21Matrix operator*(const double num, const S21Matrix &my);
+
 
 #endif  // CPP1_S21_MATRIXPLUS_S21_MATRIX_H

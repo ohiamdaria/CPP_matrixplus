@@ -10,12 +10,13 @@ S21Matrix::S21Matrix(int rows, int cols) : rows_(rows), cols_(cols) {
 
 S21Matrix::S21Matrix(const S21Matrix &other)
     : rows_(other.rows_), cols_(other.cols_) {
-  this->CopyMatrix(other);
+  *this = other;
 }
 
 S21Matrix::S21Matrix(S21Matrix &&other) noexcept {
-  *this = other;
-  other.DeleteMatrix();
+//  *this = other;
+//  other.DeleteMatrix();
+    *this = std::move(other);
 }
 
 S21Matrix::~S21Matrix() noexcept {
@@ -28,33 +29,33 @@ S21Matrix::~S21Matrix() noexcept {
   rows_ = 0;
 }
 
-int S21Matrix::s21GetRows() const noexcept { return rows_; }
+int S21Matrix::get_rows() const noexcept { return rows_; }
 
-int S21Matrix::s21GetCols() const noexcept { return cols_; }
+int S21Matrix::get_cols() const noexcept { return cols_; }
 
-void S21Matrix::s21SetRows(int row) {
+void S21Matrix::set_rows(int row) {
   S21Resize(row, cols_);
   this->rows_ = row;
 }
 
-void S21Matrix::s21SetCols(int col) {
+void S21Matrix::set_cols(int col) {
   S21Resize(rows_, col);
   this->cols_ = col;
 }
 
 void S21Matrix::S21Resize(int rows, int cols) {
   S21Matrix result(rows, cols);
-  for (auto i = 0; i < rows; i++) {
-    if (i < s21GetRows())
-      for (auto j = 0; j < cols; j++) {
-        if (j < s21GetCols())
+  for (int i = 0; i < rows; i++) {
+    if (i < get_rows())
+      for (int j = 0; j < cols; j++) {
+        if (j < get_cols())
           result.matrix_[i][j] = matrix_[i][j];
         else {
           result.matrix_[i][j] = 0.0;
         }
       }
     else {
-      for (auto j = 0; j < cols; j++) {
+      for (int j = 0; j < cols; j++) {
         result.matrix_[i][j] = 0.0;
       }
     }
@@ -64,8 +65,8 @@ void S21Matrix::S21Resize(int rows, int cols) {
 
 bool S21Matrix::EqMatrix(const S21Matrix &other) {
   if ((rows_ != other.rows_) || (cols_ != other.cols_)) return false;
-  for (auto i = 0; i < rows_; i++)
-    for (auto j = 0; j < cols_; j++)
+  for (int i = 0; i < rows_; i++)
+    for (int j = 0; j < cols_; j++)
       if (fabs(matrix_[i][j] - other.matrix_[i][j]) > 1e-6) {
         std::cout << '0';
         return false;
@@ -75,27 +76,27 @@ bool S21Matrix::EqMatrix(const S21Matrix &other) {
 
 void S21Matrix::SumMatrix(const S21Matrix &other) {
   KnowSize(other);
-  for (auto i = 0; i < rows_; i++)
-    for (auto j = 0; j < cols_; j++)
+  for (int i = 0; i < rows_; i++)
+    for (int j = 0; j < cols_; j++)
       matrix_[i][j] = other.matrix_[i][j] + matrix_[i][j];
 }
 
 void S21Matrix::SubMatrix(const S21Matrix &other) {
   KnowSize(other);
-  for (auto i = 0; i < rows_; i++)
-    for (auto j = 0; j < cols_; j++)
+  for (int i = 0; i < rows_; i++)
+    for (int j = 0; j < cols_; j++)
       matrix_[i][j] = matrix_[i][j] - other.matrix_[i][j];
 }
 
 void S21Matrix::MulNumber(const double num) {
-  for (auto i = 0; i < rows_; i++)
-    for (auto j = 0; j < cols_; j++) matrix_[i][j] = matrix_[i][j] * num;
+  for (int i = 0; i < rows_; i++)
+    for (int j = 0; j < cols_; j++) matrix_[i][j] = matrix_[i][j] * num;
 }
 
 double S21Matrix::Simple_mul(const S21Matrix &other, int current_row,
                              int current_column) {
   double result = 0.0;
-  for (auto j = 0; j < cols_; j++) {
+  for (int j = 0; j < cols_; j++) {
     result =
         matrix_[current_row][j] * other.matrix_[j][current_column] + result;
   }
@@ -106,18 +107,17 @@ void S21Matrix::MulMatrix(const S21Matrix &other) {
   if (cols_ != other.rows_)
     throw std::logic_error("Different size of matrices");
   S21Matrix result(rows_, other.cols_);
-  for (auto i = 0; i < rows_; i++)
-    for (auto j = 0; j < other.cols_; j++) {
+  for (int i = 0; i < rows_; i++)
+    for (int j = 0; j < other.cols_; j++) {
       result.matrix_[i][j] = Simple_mul(other, i, j);
     }
   this->CopyMatrix(result);
-  result.DeleteMatrix();
 }
 
 S21Matrix S21Matrix::Transpose() {
   S21Matrix result(cols_, rows_);
-  for (auto i = 0; i < cols_; i++)
-    for (auto j = 0; j < rows_; j++)
+  for (int i = 0; i < cols_; i++)
+    for (int j = 0; j < rows_; j++)
       result.matrix_[i][j] = matrix_[j][i];
   return result;
 }
@@ -125,12 +125,12 @@ S21Matrix S21Matrix::Transpose() {
 void S21Matrix::CropMatrix(const S21Matrix &other, int rows_copy,
                            int columns_copy) {
   int subi = 0;
-  for (auto i = 0; i < rows_; i++) {
+  for (int i = 0; i < rows_; i++) {
     int subj = 0;
     if (i == rows_copy) {
       continue;
     }
-    for (auto j = 0; j < cols_; j++) {
+    for (int j = 0; j < cols_; j++) {
       if (j == columns_copy) {
         continue;
       }
@@ -149,7 +149,7 @@ double S21Matrix::MainDeterminant() {
     return result =
                matrix_[0][0] * matrix_[1][1] - matrix_[1][0] * matrix_[0][1];
   } else {
-    for (auto x = 0; x < rows_; ++x) {
+    for (int x = 0; x < rows_; ++x) {
       S21Matrix copy(rows_ - 1, cols_ - 1);
       CropMatrix(copy, 0, x);
       result += (x % 2 == 0 ? 1 : -1) * matrix_[0][x] * copy.MainDeterminant();
@@ -171,8 +171,8 @@ S21Matrix S21Matrix::Minor() {
   if (rows_ == cols_ && rows_ == 1)
     minor_matrix.matrix_[0][0] = matrix_[0][0];
   else {
-    for (auto i = 0; i < rows_; ++i)
-      for (auto j = 0; j < cols_; ++j) {
+    for (int i = 0; i < rows_; ++i)
+      for (int j = 0; j < cols_; ++j) {
         S21Matrix copy(rows_ - 1, cols_ - 1);
         CropMatrix(copy, i, j);
         minor_matrix.matrix_[i][j] =
@@ -186,7 +186,6 @@ S21Matrix S21Matrix::Minor() {
 
 S21Matrix S21Matrix::CalcComplements() {
   KnowSquare();
-  this->Printmatrix();
   *this = Minor();
   return (*this);
 }
@@ -216,6 +215,7 @@ S21Matrix &S21Matrix::operator=(const S21Matrix &other)  // копировани
 
 S21Matrix &S21Matrix::operator=(S21Matrix &&other) noexcept  // перемещение
 {
+  if (this == &other) return (*this);
   std::swap(rows_, other.rows_);
   std::swap(cols_, other.cols_);
   std::swap(matrix_, other.matrix_);
@@ -279,26 +279,30 @@ S21Matrix S21Matrix::operator*=(double num) {
 }
 
 void S21Matrix::CopyMatrix(const S21Matrix &other) {
+  this->DeleteMatrix(); /* it is correct? */
   rows_ = other.rows_;
   cols_ = other.cols_;
   this->CreateMatrix();
-  for (auto i = 0; i < rows_; i++)
+  for (int i = 0; i < rows_; i++)
     std::memcpy(matrix_[i], other.matrix_[i], other.cols_ * sizeof(double));
 }
 
 void S21Matrix::CreateMatrix() {
   matrix_ = new double *[rows_];
-  if (matrix_ == nullptr) throw "Error allocate memory";
+  if (matrix_ == 0) throw "Error allocate memory";
 
-  for (auto i = 0; i < rows_; i++) {
+  for (int i = 0; i < rows_; i++) {
     matrix_[i] = new double[cols_];
-    if (matrix_ == nullptr) throw "Error allocate memory";
+    if (matrix_ == 0) {
+        this->DeleteMatrix();
+        throw "Error allocate memory";
+    }
   }
 }
 
 void S21Matrix::DeleteMatrix() {
   if (rows_ > 0 && cols_ > 0) {
-    for (auto i = rows_ - 1; i >= 0; i--) delete[] matrix_[i];
+    for (int i = rows_ - 1; i >= 0; i--) delete[] matrix_[i];
     delete[] matrix_;
   }
   matrix_ = nullptr;
@@ -306,18 +310,18 @@ void S21Matrix::DeleteMatrix() {
   rows_ = 0;
 }
 
-void S21Matrix::Printmatrix() noexcept {
-  for (auto i = 0; i < rows_; i++) {
-    for (auto j = 0; j < cols_; j++) {
-      std::cout << matrix_[i][j] << ' ';
-    }
-    std::cout << '\n';
-  }
-}
+//void S21Matrix::Printmatrix() noexcept {
+//  for (int i = 0; i < rows_; i++) {
+//    for (int j = 0; j < cols_; j++) {
+//      std::cout << matrix_[i][j] << ' ';
+//    }
+//    std::cout << '\n';
+//  }
+//}
 
 void S21Matrix::AddMatrix(double x) {
-  for (auto i = 0; i < rows_; i++)
-    for (auto j = 0; j < cols_; j++) matrix_[i][j] = x + i * j;
+  for (int i = 0; i < rows_; i++)
+    for (int j = 0; j < cols_; j++) matrix_[i][j] = x + i * j;
 }
 
 void S21Matrix::KnowSize(const S21Matrix &other) {
@@ -326,6 +330,6 @@ void S21Matrix::KnowSize(const S21Matrix &other) {
 }
 
 void S21Matrix::KnowSquare() {
-  if (s21GetRows() != cols_)
+  if (rows_ != cols_)
     throw std::logic_error("It's not a square matrix");
 }

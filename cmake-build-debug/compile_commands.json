@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/Users/dashakoroleva/Desktop/CPP_matrixplus/cmake-build-debug",
+  "command": "g++  -I/Users/dashakoroleva/Desktop/CPP_matrixplus/. -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fcolor-diagnostics -std=c++17 -std=gnu++17 -o CMakeFiles/s21_matrix_oop.dir/s21_matrix_oop.cpp.o -c /Users/dashakoroleva/Desktop/CPP_matrixplus/s21_matrix_oop.cpp",
+  "file": "/Users/dashakoroleva/Desktop/CPP_matrixplus/s21_matrix_oop.cpp"
+},
+{
+  "directory": "/Users/dashakoroleva/Desktop/CPP_matrixplus/cmake-build-debug",
+  "command": "g++  -I/Users/dashakoroleva/Desktop/CPP_matrixplus/. -isystem /opt/homebrew/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fcolor-diagnostics -std=gnu++17 -o CMakeFiles/tests.dir/tests/test_functions.cpp.o -c /Users/dashakoroleva/Desktop/CPP_matrixplus/tests/test_functions.cpp",
+  "file": "/Users/dashakoroleva/Desktop/CPP_matrixplus/tests/test_functions.cpp"
+}
+]
