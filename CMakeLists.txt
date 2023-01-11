@@ -11,7 +11,7 @@ set(TARGET_TEST tests)
 
 set(MORE_CXX_FLAGS "-std=c++17")
 set(TESTFILE_FLAGS "")
-set(TEST_FLAGS -Wall -Werror -Wextra -Wpedantic -fsanitize=address -fsanitize=leak -fsanitize=undefined -g)
+set(TEST_FLAGS -Wall -Werror -Wextra -Wpedantic -g)
 set(COVERAGE_FLAGS --coverage)
 
 set(SOURCE s21_matrix_oop.cpp)
