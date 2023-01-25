@@ -6,8 +6,6 @@
 #include <iostream>
 #include <stdexcept>
 
-#define EPS (1e-6)
-
 class S21Matrix {
  private:
   int rows_, cols_;
@@ -31,7 +29,7 @@ class S21Matrix {
 
   void CreateMatrix();
 
-  void S21Resize(int rows, int cols);
+  void Resize(int rows, int cols);
 
   void AddMatrix(double x);
 

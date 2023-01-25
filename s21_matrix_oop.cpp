@@ -14,13 +14,12 @@ S21Matrix::S21Matrix(const S21Matrix &other)
 }
 
 S21Matrix::S21Matrix(S21Matrix &&other) noexcept {
-//  *this = other;
-//  other.DeleteMatrix();
-    *this = std::move(other);
+    *this = other;
 }
 
 S21Matrix::~S21Matrix() noexcept {
   if (rows_ > 0 && cols_ > 0) {
+    std::cout << rows_ << ' ' << cols_;
     for (rows_--; rows_ >= 0; rows_--) delete[] matrix_[rows_];
     delete[] matrix_;
   }
@@ -34,16 +33,16 @@ int S21Matrix::get_rows() const noexcept { return rows_; }
 int S21Matrix::get_cols() const noexcept { return cols_; }
 
 void S21Matrix::set_rows(int row) {
-  S21Resize(row, cols_);
+  Resize(row, cols_);
   this->rows_ = row;
 }
 
 void S21Matrix::set_cols(int col) {
-  S21Resize(rows_, col);
+  Resize(rows_, col);
   this->cols_ = col;
 }
 
-void S21Matrix::S21Resize(int rows, int cols) {
+void S21Matrix::Resize(int rows, int cols) {
   S21Matrix result(rows, cols);
   for (int i = 0; i < rows; i++) {
     if (i < get_rows())
@@ -215,11 +214,11 @@ S21Matrix &S21Matrix::operator=(const S21Matrix &other)  // копировани
 
 S21Matrix &S21Matrix::operator=(S21Matrix &&other) noexcept  // перемещение
 {
-  if (this == &other) return (*this);
-  std::swap(rows_, other.rows_);
-  std::swap(cols_, other.cols_);
-  std::swap(matrix_, other.matrix_);
-  other.DeleteMatrix();
+  if (this != &other) {
+      std::swap(rows_, other.rows_);
+      std::swap(cols_, other.cols_);
+      std::swap(matrix_, other.matrix_);
+  }
   return (*this);
 }
 
@@ -278,7 +277,6 @@ void S21Matrix::operator*=(double num) {
 }
 
 void S21Matrix::CopyMatrix(const S21Matrix &other) {
-  this->DeleteMatrix(); /* it is correct? */
   rows_ = other.rows_;
   cols_ = other.cols_;
   this->CreateMatrix();
@@ -306,7 +304,6 @@ void S21Matrix::DeleteMatrix() {
   }
   matrix_ = nullptr;
   cols_ = 0;
-  rows_ = 0;
 }
 
 //void S21Matrix::Printmatrix() noexcept {
